@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "53912609647",
+    "project_id": "fantasyfootball-d50d1",
+    "storage_bucket": "fantasyfootball-d50d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53912609647:android:08223998867bff0b937e9a",
+        "android_client_info": {
+          "package_name": "com.example.fantasyfootball"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "53912609647-14f1n8tu5r8mdcu8oqi8st1e9iu2gbg6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIyjSMkjcPzv3_3fyKtgHpAuPmlpOQKMM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "53912609647-14f1n8tu5r8mdcu8oqi8st1e9iu2gbg6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
