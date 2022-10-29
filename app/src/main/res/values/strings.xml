@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">FantasyFootball</string>
+    <string name="enter_login_string">Enter login</string>
+    <string name="register_login_string">Register login</string>
+    <string name="email_hint_string">Email</string>
+    <string name="password_hint_string">Password</string>
+    <string name="login_string">Login</string>
+    <string name="logo">logo</string>
+    <string name="register">Register</string>
+    <string name="logout_string">Logout</string>
+    <string name="register_string">Register</string>
+    <string name="forgot_password_hint_string">Forgot password?</string>
+    <string name="login_toast">Please enter email.</string>
+    <string name="password_toast">Please enter password!</string>
+    <string name="register_success_string">Registration successful.</string>
+    <string name="register_failed_string">Registration failed. Please try again later</string>
+    <string name="invalid_password">Password must contain 8 characters with one letter and one number.</string>
+    <string name="invalid_email">Please enter valid email.</string>
 </resources>

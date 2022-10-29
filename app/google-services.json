@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "53912609647",
-    "project_id": "fantasyfootball-d50d1",
-    "storage_bucket": "fantasyfootball-d50d1.appspot.com"
+    "project_number": "1068542317703",
+    "project_id": "fantasyfootball-6ec12",
+    "storage_bucket": "fantasyfootball-6ec12.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:53912609647:android:08223998867bff0b937e9a",
+        "mobilesdk_app_id": "1:1068542317703:android:f7da55c9a53ab95218d422",
         "android_client_info": {
           "package_name": "com.example.fantasyfootball"
         }
       },
       "oauth_client": [
         {
-          "client_id": "53912609647-14f1n8tu5r8mdcu8oqi8st1e9iu2gbg6.apps.googleusercontent.com",
+          "client_id": "1068542317703-3apc88l6pmuuvs2sg92jj9hi002c1n2i.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBIyjSMkjcPzv3_3fyKtgHpAuPmlpOQKMM"
+          "current_key": "AIzaSyBL0y2DYY2J64v_c0ireUdlKFszreLtJ3U"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "53912609647-14f1n8tu5r8mdcu8oqi8st1e9iu2gbg6.apps.googleusercontent.com",
+              "client_id": "1068542317703-3apc88l6pmuuvs2sg92jj9hi002c1n2i.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
