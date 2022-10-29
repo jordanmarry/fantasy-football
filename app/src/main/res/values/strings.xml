@@ -5,6 +5,7 @@
     <string name="email_hint_string">Email</string>
     <string name="password_hint_string">Password</string>
     <string name="login_string">Login</string>
+    <string name="register">Register</string>
     <string name="logout_string">Logout</string>
     <string name="register_string">Register</string>
     <string name="forgot_password_hint_string">Forgot password?</string>

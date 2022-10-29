@@ -10,21 +10,11 @@
         android:name="com.example.fantasyfootball.MainFragment"
         android:label="MainFragment">
         <action
-            android:id="@+id/action_mainFragment_to_loginFragment"
-            app:destination="@id/loginFragment"/>
+            android:id="@+id/action_mainFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment"/>
         <action
             android:id="@+id/action_mainFragment_to_registrationFragment"
             app:destination="@id/registrationFragment"/>
-    </fragment>
-
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.fantasyfootball.LoginFragment"
-        android:label="LoginFragment"
-        tools:layout="@layout/login_fragment" >
-        <action
-            android:id="@+id/action_loginFragment_to_dashboardFragment"
-            app:destination="@id/dashboardFragment" />
     </fragment>
 
     <fragment
