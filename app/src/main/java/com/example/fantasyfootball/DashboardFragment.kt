@@ -30,7 +30,6 @@ class DashboardFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
         // Pass the array of matches through to get displayed (MatchesAdapter.kt)
-        Log.i(TAG, "Here")
         binding.recyclerView.adapter = TeamAdapter(teams)
 
         // Lets the view snap into place
