@@ -1,38 +1,48 @@
 package com.example.fantasyfootball
 
+import android.util.Log
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.SnapHelper
 import com.example.fantasyfootball.databinding.DashboardFragmentBinding
-import com.google.firebase.auth.FirebaseAuth
 
-class DashboardFragment: Fragment() {
+class DashboardFragment : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Use the provided ViewBinding class to inflate
-        // the layout and then return the root view.
+        // Create the matches Array
+        val teams: ArrayList<String> = ArrayList()
+        for (i in 1..3) {
+            teams.add("DanielMalone.com #$i")
+        }
+        // creating the binding root
         val binding = DashboardFragmentBinding.inflate(inflater, container, false)
 
-        binding.dashboardLogout.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
+        // Create a recyclerview
+        binding.recyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
-            Toast.makeText(
-                requireContext(),
-                "You are now logged out!",
-                Toast.LENGTH_SHORT
-            ).show()
+        // Pass the array of matches through to get displayed (MatchesAdapter.kt)
+        Log.i(TAG, "Here")
+        binding.recyclerView.adapter = TeamAdapter(teams)
 
-            findNavController().popBackStack(R.id.mainFragment, false)
-        }
+        // Lets the view snap into place
+        val snapHelper: SnapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(binding.recyclerView)
 
-        // Return the root view.
+
         return binding.root
     }
+
+    companion object {
+        const val TAG = "Football"
+    }
+
 }
