@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_mainFragment_to_registrationFragment"
             app:destination="@id/registrationFragment"/>
+        <action
+            android:id="@+id/action_mainFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment"/>
     </fragment>
 
     <fragment
@@ -28,9 +31,18 @@
     </fragment>
 
     <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.example.fantasyfootball.ForgotPasswordFragment"
+        android:label="ForgotPasswordFragment"
+        tools:layout="@layout/forgot_password_fragment" >
+    <action
+        android:id="@+id/action_forgotPasswordFragment_to_mainFragment"
+        app:destination="@id/mainFragment" />
+    </fragment>
+
+    <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.example.fantasyfootball.DashboardFragment"
         android:label="dashboard_fragment"
         tools:layout="@layout/dashboard_fragment" />
-
 </navigation>

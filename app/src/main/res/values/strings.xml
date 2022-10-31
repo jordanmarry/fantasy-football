@@ -7,6 +7,7 @@
     <string name="login_string">Login</string>
     <string name="logo">logo</string>
     <string name="register">Register</string>
+    <string name="forgot_password_button">Send Password Reset Email</string>
     <string name="logout_string">Logout</string>
     <string name="register_string">Register</string>
     <string name="forgot_password_hint_string">Forgot password?</string>
@@ -16,4 +17,6 @@
     <string name="register_failed_string">Registration failed. Please try again later</string>
     <string name="invalid_password">Password must contain 8 characters with one letter and one number.</string>
     <string name="invalid_email">Please enter valid email.</string>
+    <string name="successful_reset">Email has successfully been sent.</string>
+    <string name="reset_info_string">Enter your email address and you will receive an email to reset your password.</string>
 </resources>
