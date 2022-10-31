@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Raion Fet/fantasy-football/app/src/main/res/layout/forgot_password_fragment.xml" value="0.24427083333333333" />
+        <entry key="..\:/Users/Raion Fet/fantasy-football/app/src/main/res/layout/forgotpassword_fragment.xml" value="0.24427083333333333" />
+        <entry key="..\:/Users/Raion Fet/fantasy-football/app/src/main/res/layout/main_fragment.xml" value="0.24427083333333333" />
+        <entry key="..\:/Users/Raion Fet/fantasy-football/app/src/main/res/layout/registration_fragment.xml" value="0.24427083333333333" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dashboard.xml" value="0.11203703703703703" />
         <entry key="app/src/main/res/layout/dashboard_fragment.xml" value="0.2283020019531252" />
