@@ -32,6 +32,12 @@ class MainFragment: Fragment() {
             )
         }
 
+        binding.forgotPasswordHint.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_mainFragment_to_forgotPasswordFragment
+            )
+        }
+
         return binding.root
     }
 
