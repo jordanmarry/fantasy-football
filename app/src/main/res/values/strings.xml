@@ -19,4 +19,14 @@
     <string name="invalid_email">Please enter valid email.</string>
     <string name="successful_reset">Email has successfully been sent.</string>
     <string name="reset_info_string">Enter your email address and you will receive an email to reset your password.</string>
+    <string name="upcoming_matches"><u><b>Upcoming Matches</b></u></string>
+    <string name="current_league"><u><b>Current Leagues</b></u></string>
+    <string name="import_league">Import League</string>
+    <string name="create_league">Create League</string>
+    <string name="league_name_placeholder">League Name Placeholder</string>
+    <string name="points">Points</string>
+    <string name="points_placeholder">Points Placeholder</string>
+    <string name="team_name_placeholder">Team Name Placeholder</string>
+    <string name="record_placeholder">Record PlaceHolder</string>
+    <string name="player">player</string>
 </resources>
