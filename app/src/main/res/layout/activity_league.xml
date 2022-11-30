@@ -75,7 +75,7 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".29"
+        app:layout_constraintVertical_bias=".27"
         android:lines="1"/>
 
     <TextView
@@ -93,7 +93,7 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".39"
+        app:layout_constraintVertical_bias=".355"
         android:lines="1"/>
 
     <Button
