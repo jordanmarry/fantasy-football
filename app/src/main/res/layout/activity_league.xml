@@ -23,13 +23,8 @@
         app:layout_constraintVertical_bias="0"
         android:text="@string/league_name_placeholder"
         android:lines="2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black">
+    </TextView>
 
     <TextView
         android:id="@+id/teamName"
@@ -63,6 +58,7 @@
         app:layout_constraintVertical_bias="0.25"
         android:text="@string/player"
         android:lines="1">
+    </TextView>
 
     <TextView
         android:id="@+id/player2"
@@ -79,6 +75,7 @@
         app:layout_constraintVertical_bias="0.35"
         android:text="@string/player"
         android:lines="1">
+    </TextView>
 
     <TextView
         android:id="@+id/player3"
@@ -129,6 +126,7 @@
         app:layout_constraintVertical_bias="0.65"
         android:text="@string/player"
         android:lines="1">
+    </TextView>
 
     <Button
         android:id="@+id/overview"
