@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.fantasyfootball.databinding.MainFragmentBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -17,6 +18,7 @@ class MainFragment: Fragment() {
 
     /** Binding to XML layout */
     private lateinit var binding: MainFragmentBinding
+    private val viewModel by viewModels<NetworkViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Use the provided ViewBinding class to inflate the layout.
@@ -37,7 +39,7 @@ class MainFragment: Fragment() {
                 R.id.action_mainFragment_to_forgotPasswordFragment
             )
         }
-
+        viewModel.sendNetworkRequest()
         return binding.root
     }
 
