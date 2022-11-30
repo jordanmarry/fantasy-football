@@ -44,5 +44,16 @@
         android:id="@+id/dashboardFragment"
         android:name="com.example.fantasyfootball.DashboardFragment"
         android:label="dashboard_fragment"
-        tools:layout="@layout/dashboard_fragment" />
+        tools:layout="@layout/dashboard_fragment">
+    <action
+            android:id="@+id/action_dashboardFragment_to_overviewFragment"
+            app:destination="@id/overviewFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/overviewFragment"
+        android:name="com.example.fantasyfootball.OverviewFragment"
+        android:label="OverviewFragment"
+        tools:layout="@layout/overview_fragment"/>
+
 </navigation>
