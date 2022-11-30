@@ -2,7 +2,6 @@ package com.example.fantasyfootball
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.example.fantasyfootball.databinding.ActivityLeagueBinding
 
 class LeagueActivity : AppCompatActivity() {
@@ -21,7 +20,6 @@ class LeagueActivity : AppCompatActivity() {
         if (league != null){
             binding.leagueName.text = league.leagueName
             binding.teamName.text = league.teamName
-            binding.record.text = league.record
         }
     }
 

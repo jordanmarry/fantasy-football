@@ -29,4 +29,5 @@
     <string name="team_name_placeholder">Team Name Placeholder</string>
     <string name="record_placeholder">Record PlaceHolder</string>
     <string name="player">player</string>
+    <string name="overview">Overview</string>
 </resources>

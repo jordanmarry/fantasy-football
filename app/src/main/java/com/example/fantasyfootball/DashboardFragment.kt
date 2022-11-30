@@ -22,31 +22,10 @@ class DashboardFragment : Fragment(), LeagueClickListener {
         savedInstanceState: Bundle?
     ): View {
 
-        // Create the matches Array
-        val nflImages: ArrayList<Int> = ArrayList()
-        nflImages.add(R.drawable.commanders)
-        nflImages.add(R.drawable.raven)
-        nflImages.add(R.drawable.cardinal)
-
-        val teams: ArrayList<Pair<Int, Int>> = ArrayList()
-        for (i in 0..5) {
-            val team1 = Random.nextInt(0,3)
-            var team2 = Random.nextInt(0,3)
-            while (team2 == team1){
-                team2 = Random.nextInt(0,3)
-            }
-            teams.add(Pair(nflImages[team1], nflImages[team2]))
-        }
-
         createLeagues()
 
         // creating the binding root
         val binding = DashboardFragmentBinding.inflate(inflater, container, false)
-
-        binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
-            adapter = TeamAdapter(teams)
-        }
 
         val act = this
 
@@ -54,10 +33,6 @@ class DashboardFragment : Fragment(), LeagueClickListener {
             layoutManager = GridLayoutManager(activity,2)
             adapter = LeagueAdapter(leagueList, act)
         }
-
-        // Lets the view snap into place
-        val snapHelper: SnapHelper = LinearSnapHelper()
-        snapHelper.attachToRecyclerView(binding.recyclerView)
 
         return binding.root
 
