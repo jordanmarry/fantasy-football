@@ -30,4 +30,5 @@
     <string name="record_placeholder">Record PlaceHolder</string>
     <string name="player">player</string>
     <string name="overview">Overview</string>
+    <string name="advice">Advice</string>
 </resources>
