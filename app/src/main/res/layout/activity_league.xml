@@ -13,9 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/league_name_placeholder"
+        android:padding="15dp"
         android:textSize="25sp"
-        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0"
+        android:text="@string/league_name_placeholder"
         android:lines="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,72 +35,100 @@
         android:id="@+id/teamName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/team_name_placeholder"
         android:gravity="center"
+        android:padding="15dp"
         android:textSize="20sp"
-        android:paddingTop="5dp"
-        android:paddingLeft="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".1"
-        android:lines="1"/>
+        app:layout_constraintVertical_bias="0.15"
+        android:text="@string/team_name_placeholder"
+        android:lines="1">
+    </TextView>
 
     <TextView
         android:id="@+id/player1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/player"
-        android:textSize="20sp"
         android:gravity="center"
-        android:paddingTop="30dp"
-        android:paddingLeft="10dp"
-        android:paddingBottom="10dp"
+        android:padding="15dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".15"
-        android:lines="1"/>
+        app:layout_constraintVertical_bias="0.25"
+        android:text="@string/player"
+        android:lines="1">
 
     <TextView
         android:id="@+id/player2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/player"
-        android:textSize="20sp"
         android:gravity="center"
-        android:paddingTop="5dp"
-        android:paddingLeft="10dp"
-        android:paddingBottom="10dp"
+        android:padding="15dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".27"
-        android:lines="1"/>
+        app:layout_constraintVertical_bias="0.35"
+        android:text="@string/player"
+        android:lines="1">
 
     <TextView
         android:id="@+id/player3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/player"
-        android:textSize="20sp"
         android:gravity="center"
-        android:paddingTop="5dp"
-        android:paddingLeft="10dp"
-        android:paddingBottom="10dp"
+        android:padding="15dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".355"
-        android:lines="1"/>
+        app:layout_constraintVertical_bias="0.45"
+        android:text="@string/player"
+        android:lines="1">
+
+    </TextView>
+    <TextView
+        android:id="@+id/player4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="15dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.55"
+        android:text="@string/player"
+        android:lines="1">
+
+    </TextView>
+    <TextView
+        android:id="@+id/player5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="15dp"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65"
+        android:text="@string/player"
+        android:lines="1">
 
     <Button
         android:id="@+id/overview"
@@ -106,5 +140,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1" />
+
+    <Button
+        android:id="@+id/advice"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:text="@string/advice"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".98" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
