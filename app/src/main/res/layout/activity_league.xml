@@ -23,8 +23,12 @@
         app:layout_constraintVertical_bias="0"
         android:text="@string/league_name_placeholder"
         android:lines="2"
+<<<<<<< Updated upstream
         android:textColor="@color/black">
     </TextView>
+=======
+        android:textColor="@color/black"/>
+>>>>>>> Stashed changes
 
     <TextView
         android:id="@+id/teamName"
@@ -58,6 +62,7 @@
         app:layout_constraintVertical_bias="0.25"
         android:text="@string/player"
         android:lines="1">
+    </TextView>
 
     </TextView>
     <TextView
@@ -75,6 +80,7 @@
         app:layout_constraintVertical_bias="0.35"
         android:text="@string/player"
         android:lines="1">
+    </TextView>
 
     </TextView>
     <TextView
@@ -126,7 +132,10 @@
         app:layout_constraintVertical_bias="0.65"
         android:text="@string/player"
         android:lines="1">
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     </TextView>
 
     <Button
