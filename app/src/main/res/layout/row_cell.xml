@@ -33,14 +33,14 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginLeft="15dp"
-            android:src="@drawable/cardinal" />
+            android:src="@drawable/ari" />
 
         <ImageView
             android:id="@+id/team2"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginLeft="235dp"
-            android:src="@drawable/raven" />
+            android:src="@drawable/bal" />
 
     </androidx.cardview.widget.CardView>
 
