@@ -1,7 +1,9 @@
 package com.example.fantasyfootball
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.fantasyfootball.databinding.ActivityLeagueBinding
 
 class LeagueActivity : AppCompatActivity() {
@@ -13,6 +15,12 @@ class LeagueActivity : AppCompatActivity() {
         binding = ActivityLeagueBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val adviceButton = binding.advice
+
+        adviceButton.setOnClickListener{
+            startActivity(Intent(this, AdviceActivity::class.java))
+        }
+
         val leagueID = intent.getIntExtra(LEAGUE_ID_EXTRA  , -1)
 
         val league = leagueFromID(leagueID)
@@ -21,6 +29,7 @@ class LeagueActivity : AppCompatActivity() {
             binding.leagueName.text = league.leagueName
             binding.teamName.text = league.teamName
         }
+
     }
 
     private fun leagueFromID(leagueID: Int): League? {

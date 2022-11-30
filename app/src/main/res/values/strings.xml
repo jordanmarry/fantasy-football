@@ -30,4 +30,8 @@
     <string name="record_placeholder">Record PlaceHolder</string>
     <string name="player">player</string>
     <string name="overview">Overview</string>
+    <string name="advice">advice</string>
+    <string name="players_to_sell"><u><b>Players to Sell</b></u></string>
+    <string name="weak_positions"><u><b>Weak Positions</b></u></string>
+    <string name="strong_positions"><u><b>Strong Positions</b></u></string>
 </resources>
