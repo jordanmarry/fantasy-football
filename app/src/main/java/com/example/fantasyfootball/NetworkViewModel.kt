@@ -16,7 +16,6 @@ import org.json.JSONObject
 import org.json.JSONTokener
 
 
-
 class NetworkViewModel() : ViewModel() {
 
     /** Modifiable live data for internal use only. */
@@ -84,7 +83,7 @@ class NetworkViewModel() : ViewModel() {
             ).nextValue() as JSONObject
 
             // Extract value of "earthquakes" key -- a List
-            val array = responseObject.getJSONArray("")
+            val array = responseObject.getJSONArray("players")
 
             //dbHelper = PlayerDatabase(this)
 
@@ -130,7 +129,7 @@ class NetworkViewModel() : ViewModel() {
      * Constants
      */
     companion object {
-        private const val URL = "https://api.sportsdata.io/v3/nfl/stats/json/PlayerSeasonStats/2022REG?key=13caaaa8ddd14ba2b42a6067b9b12946"
+        private const val URL = "https://jharley19.github.io/RFL-Webpage/PlayerData.json"
 
         const val GP_TAG = "Played"
         const val POS_TAG = "Position"
@@ -230,4 +229,5 @@ class NetworkViewModel() : ViewModel() {
                         } */
 
     }
+
 }
