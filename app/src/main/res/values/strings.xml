@@ -31,6 +31,9 @@
     <string name="player">player</string>
     <string name="overview">Overview</string>
     <string name="advice">advice</string>
+    <string name="players_to_sell"><u><b>Players to Sell</b></u></string>
+    <string name="weak_positions"><u><b>Weak Positions</b></u></string>
+    <string name="strong_positions"><u><b>Strong Positions</b></u></string>
     <string name="nfl_team_stake"><u><b>NFL Team Stake</b></u></string>
     <string name="nfl_team_and_percentage">NFL Team and Percentage</string>
     <string name="top_5_most_rostered_players"><u><b>Top 5 Most Rostered Players</b></u></string>
