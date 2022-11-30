@@ -6,13 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
-import androidx.recyclerview.widget.SnapHelper
 import com.example.fantasyfootball.databinding.DashboardFragmentBinding
-import kotlin.collections.ArrayList
-import kotlin.random.Random
+import androidx.navigation.fragment.findNavController
 
 class DashboardFragment : Fragment(), LeagueClickListener {
 
@@ -32,6 +28,12 @@ class DashboardFragment : Fragment(), LeagueClickListener {
         binding.recyclerView2.apply {
             layoutManager = GridLayoutManager(activity,2)
             adapter = LeagueAdapter(leagueList, act)
+        }
+
+        binding.overview.setOnClickListener{
+            findNavController().navigate(
+                R.id.action_dashboardFragment_to_overviewFragment
+            )
         }
 
         return binding.root
