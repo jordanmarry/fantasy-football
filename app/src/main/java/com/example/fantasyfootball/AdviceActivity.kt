@@ -16,6 +16,18 @@ class AdviceActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        val leagueID = intent.getIntExtra(LEAGUE_ID_EXTRA  , -1)
+
+        val league = leagueFromID(leagueID)
+
+    }
+
+    private fun leagueFromID(leagueID: Int): League? {
+        for (league in leagueList) {
+            if (league.id == leagueID)
+                return league
+        }
+        return null
     }
 
 }

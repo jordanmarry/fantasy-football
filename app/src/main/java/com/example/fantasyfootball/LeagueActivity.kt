@@ -15,15 +15,21 @@ class LeagueActivity : AppCompatActivity() {
         binding = ActivityLeagueBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val adviceButton = binding.advice
-
-        adviceButton.setOnClickListener{
-            startActivity(Intent(this, AdviceActivity::class.java))
-        }
-
         val leagueID = intent.getIntExtra(LEAGUE_ID_EXTRA  , -1)
 
         val league = leagueFromID(leagueID)
+
+        val adviceButton = binding.advice
+
+        val intent = Intent(this, AdviceActivity::class.java)
+        if (league != null) {
+            intent.putExtra(LEAGUE_ID_EXTRA, league.id)
+        }
+
+        adviceButton.setOnClickListener{
+            startActivity(intent)
+
+        }
 
         if (league != null){
             binding.leagueName.text = league.leagueName
