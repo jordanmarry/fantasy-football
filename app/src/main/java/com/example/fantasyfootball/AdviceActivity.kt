@@ -9,6 +9,7 @@ import com.example.fantasyfootball.databinding.ActivityAdviceBinding
 class AdviceActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityAdviceBinding
+    lateinit var league : League
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,7 +19,7 @@ class AdviceActivity : AppCompatActivity() {
 
         val leagueID = intent.getIntExtra(LEAGUE_ID_EXTRA  , -1)
 
-        val league = leagueFromID(leagueID)
+        league = leagueFromID(leagueID)!!
 
     }
 
