@@ -1,7 +1,6 @@
 package com.example.fantasyfootball
 
 import androidx.lifecycle.LiveData
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -52,15 +51,16 @@ class NetworkViewModel() : ViewModel() {
         // Launch a new coroutine to run network request in the background.
         job = viewModelScope.launch {
             try {
-                Log.d("HERE", "START NETWORK CALL")
                 // 1. Run the suspending network request.
                 val rawJson = makeNetworkCall(URL)
-                Log.d("HERE", "FINISH NETWORK CALL")
+                //Log.i("test this ", "$rawJson");
+                parseJsonString(rawJson)
+            } catch (e: Exception) {
+                val rawJson = makeNetworkCall(URL)
                 parseJsonString(rawJson)
             } catch (e: Exception) {
                 // Something went wrong ... post error to LiveData feed.
                 //_statusLiveData.postValue(Status.Error(R.string.send_request_error, e))
-                Log.d("HERE", "$e")
             }
         }
     }
@@ -71,7 +71,6 @@ class NetworkViewModel() : ViewModel() {
      */
     private suspend fun makeNetworkCall(url: String): String =
         withContext(Dispatchers.IO) {
-            Log.d("HERE", "MIDWAY NETWORK CALL")
             // Construct a new Ktor HttpClient to perform the get
             // request and then return the JSON result.
             String(HttpClient().get(url).body(), charset("UTF-8"))
@@ -103,24 +102,26 @@ class NetworkViewModel() : ViewModel() {
 
                 // QBs - name, team, pos, gp, pass attempts, pass comp,
                 // pass yards, pass comp %, pass TDs, INTs, rating, rush yds, rush tds, fumbleslost, ff points
+
                 if (currPlayer.get(POS_TAG) == "QB" || currPlayer.get(POS_TAG) == "RB" || currPlayer.get(POS_TAG) == "WR" ||
                     currPlayer.get(POS_TAG) == "TE" || currPlayer.get(POS_TAG) == "K"
                 ) {
 
+                    val playerSnaps = currPlayer.get(OFF_SNAP_PLAYED_TAG) as Int
+                    val teamSnaps = currPlayer.get(OFF_TEAM_SNAP_TAG)as Int
                     writer.writePlayer(currPlayer.get(NAME_TAG) as String, currPlayer.get(TEAM_TAG)as String,
-                        currPlayer.get(POS_TAG)as String,currPlayer.get(GP_TAG)as Int, currPlayer.get(OFF_SNAP_PLAYED_TAG) as Int,
-                        currPlayer.get(OFF_TEAM_SNAP_TAG)as Int, currPlayer.get(PASS_ATT_TAG)as Double
+                        currPlayer.get(POS_TAG)as String, currPlayer.get(FF_PTS_TAG)as Double / currPlayer.get(GP_TAG)as Int,
+                        playerSnaps.toDouble() / teamSnaps, currPlayer.get(PASS_ATT_TAG)as Double
                         , currPlayer.get(PASS_COMP_TAG)as Double, currPlayer.get(PASS_YDS_TAG)as Double
                         , currPlayer.get(PASS_COMP_PERCENT_TAG)as Double, currPlayer.get(PASS_TD_TAG)as Double
-                        , currPlayer.get(INT_TAG)as Double, currPlayer.get(RATING_TAG)as Double
-                        , currPlayer.get(RUSH_ATT_TAG)as Double, currPlayer.get(RUSH_YD_TAG)as Double
-                        , currPlayer.get(RUSH_YD_PER_ATT_TAG)as Double, currPlayer.get(RUSH_TD_TAG)as Double
-                        , currPlayer.get(REC_TAR_TAG)as Double, currPlayer.get(REC_TAG)as Double
-                        , currPlayer.get(REC_YD_TAG)as Double, currPlayer.get(REC_YD_PER_REC_TAG)as Double
-                        , currPlayer.get(REC_TD_TAG)as Double, currPlayer.get(FUMBLE_TAG)as Double
-                        , currPlayer.get(FG_ATT_TAG)as Double, currPlayer.get(FG_MADE_TAG)as Double
-                        , currPlayer.get(EXP_MADE_TAG)as Double, currPlayer.get(FF_PTS_TAG)as Double)
-
+                    , currPlayer.get(INT_TAG)as Double, currPlayer.get(RATING_TAG)as Double
+                    , currPlayer.get(RUSH_ATT_TAG)as Double, currPlayer.get(RUSH_YD_TAG)as Double
+                    , currPlayer.get(RUSH_YD_PER_ATT_TAG)as Double, currPlayer.get(RUSH_TD_TAG)as Double
+                    , currPlayer.get(REC_TAR_TAG)as Double, currPlayer.get(REC_TAG)as Double
+                    , currPlayer.get(REC_YD_TAG)as Double, currPlayer.get(REC_YD_PER_REC_TAG)as Double
+                    , currPlayer.get(REC_TD_TAG)as Double, currPlayer.get(FUMBLE_TAG)as Double
+                    , currPlayer.get(FG_ATT_TAG)as Double, currPlayer.get(FG_MADE_TAG)as Double
+                    , currPlayer.get(EXP_MADE_TAG)as Double, currPlayer.get(FF_PTS_TAG)as Double)
 
                 }
             }
@@ -177,60 +178,6 @@ class NetworkViewModel() : ViewModel() {
         //       pass yards, pass comp %, pass TDs, INTs, rating, rush attemmpts, rush yards,
         //       rush yards per att, rush tds, targets, receptions, receiving yds, receivng yards per recep, receiving tds,
         //       fumbleslost, field goals att, field goals made, extra point made, ff points
-        /*
-                        result.add(
-                            NAME_TAG + ":"
-                                    + array.get(NAME_TAG) + ","
-                                    + TEAM_TAG + ":"
-                                    + array.getString(TEAM_TAG) + ","
-                                    + POS_TAG + ":"
-                                    + array.get(POS_TAG)
-                                    + GP_TAG + ":"
-                                    + array.get(GP_TAG)
-                                    + PASS_ATT_TAG + ":"
-                                    + array.get(PASS_ATT_TAG)
-                                    + PASS_COMP_TAG + ":"
-                                    + array.get(PASS_COMP_TAG)
-                                    + PASS_YDS_TAG + ":"
-                                    + array.get(PASS_YDS_TAG)
-                                    + PASS_COMP_PERCENT_TAG + ":"
-                                    + array.get(PASS_COMP_PERCENT_TAG)
-                                    + PASS_TD_TAG + ":"
-                                    + array.get(PASS_TD_TAG)
-                                    + INT_TAG+ ":"
-                                    + array.get(INT_TAG)
-                                    + RATING_TAG + ":"
-                                    + array.get(RATING_TAG)
-                                    + RUSH_ATT_TAG + ":"
-                                    + array.get(RUSH_ATT_TAG)
-                                    + RUSH_YD_TAG + ":"
-                                    + array.get(RUSH_YD_TAG)
-                                    + RUSH_YD_PER_ATT_TAG + ":"
-                                    + array.get(RUSH_YD_PER_ATT_TAG)
-                                    + RUSH_TD_TAG + ":"
-                                    + array.get(RUSH_TD_TAG)
-                                    + REC_TAR_TAG + ":"
-                                    + array.get(REC_TAR_TAG)
-                                    + REC_TAG + ":"
-                                    + array.get(REC_TAG)
-                                    + REC_YD_TAG + ":"
-                                    + array.get(REC_YD_TAG)
-                                    + REC_YD_PER_REC_TAG + ":"
-                                    + array.get(REC_YD_PER_REC_TAG)
-                                    + REC_TD_TAG + ":"
-                                    + array.get(REC_TD_TAG)
-                                    + FUMBLE_TAG + ":"
-                                    + array.get(FUMBLE_TAG)
-                                    + FG_ATT_TAG + ":"
-                                    + array.get(FG_ATT_TAG)
-                                    + FG_MADE_TAG + ":"
-                                    + array.get(FG_MADE_TAG)
-                                    + EXP_MADE_TAG + ":"
-                                    + array.get(EXP_MADE_TAG)
-                                    + FF_PTS_TAG + ":"
-                                    + array.get(FF_PTS_TAG)
-                        )
-                    } */
 
     }
 

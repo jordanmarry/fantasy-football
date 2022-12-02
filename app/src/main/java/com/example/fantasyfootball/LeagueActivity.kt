@@ -52,4 +52,5 @@ class LeagueActivity : AppCompatActivity() {
 
         })
     }
+
 }
