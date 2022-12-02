@@ -16,8 +16,7 @@
         <activity
             android:name=".LeagueActivity"
             android:exported="false" />
-        <activity
-            android:name=".AdviceActivity"
+        <activity android:name=".AdviceActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fantasyfootball.databinding.CardCellBinding
-import android.util.Log
 
 class LeagueAdapter (private val leagues: List<League>, private val clickListener: LeagueClickListener) :
     RecyclerView.Adapter<LeagueAdapter.LeagueViewHolder>() {
@@ -28,13 +27,11 @@ class LeagueAdapter (private val leagues: List<League>, private val clickListene
         fun bindLeague(league: League){
             cardCellBinding.leagueName.text = league.leagueName
             cardCellBinding.teamName.text = league.teamName
-            cardCellBinding.record.text = league.record
 
             cardCellBinding.cardView.setOnClickListener{
                 clickListener.onClick(league)
             }
         }
     }
-
 
 }

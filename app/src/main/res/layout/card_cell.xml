@@ -38,25 +38,9 @@
                 android:text="@string/team_name_placeholder"
                 android:gravity="center"
                 android:textSize="20sp"
-                android:paddingTop="5dp"
-                android:paddingLeft="10dp"
+                android:paddingBottom="15dp"
                 android:lines="1">
             </TextView>
-
-            <TextView
-                android:id="@+id/record"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/record_placeholder"
-                android:textSize="20sp"
-                android:gravity="center"
-                android:paddingTop="5dp"
-                android:paddingLeft="10dp"
-                android:paddingBottom="10dp"
-                android:lines="1">
-
-            </TextView>
-
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
