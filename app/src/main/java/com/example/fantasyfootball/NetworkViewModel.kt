@@ -108,9 +108,17 @@ class NetworkViewModel() : ViewModel() {
                 ) {
 
                     val playerSnaps = currPlayer.get(OFF_SNAP_PLAYED_TAG) as Int
-                    val teamSnaps = currPlayer.get(OFF_TEAM_SNAP_TAG)as Int
+                    var teamSnaps = currPlayer.get(OFF_TEAM_SNAP_TAG)as Int
+                    var playerGp = currPlayer.get(GP_TAG)as Int
+
+                    if(playerGp == 0){
+                        playerGp = 1
+                    }
+                    if(teamSnaps == 0){
+                        teamSnaps = 1
+                    }
                     writer.writePlayer(currPlayer.get(NAME_TAG) as String, currPlayer.get(TEAM_TAG)as String,
-                        currPlayer.get(POS_TAG)as String, currPlayer.get(FF_PTS_TAG)as Double / currPlayer.get(GP_TAG)as Int,
+                        currPlayer.get(POS_TAG)as String, currPlayer.get(FF_PTS_TAG)as Double / playerGp,
                         playerSnaps.toDouble() / teamSnaps, currPlayer.get(PASS_ATT_TAG)as Double
                         , currPlayer.get(PASS_COMP_TAG)as Double, currPlayer.get(PASS_YDS_TAG)as Double
                         , currPlayer.get(PASS_COMP_PERCENT_TAG)as Double, currPlayer.get(PASS_TD_TAG)as Double
