@@ -1,11 +1,12 @@
-package com.example.fantasyfootball
-
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.fantasyfootball.League
+import com.example.fantasyfootball.Player
 import com.example.fantasyfootball.databinding.ActivityAdviceBinding
+import com.example.fantasyfootball.databinding.ActivityLeagueBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.*
 
 
 class AdviceActivity : AppCompatActivity() {
@@ -13,6 +14,9 @@ class AdviceActivity : AppCompatActivity() {
     private lateinit var binding : ActivityAdviceBinding
     private  lateinit var league: League
     private lateinit var database: DatabaseReference
+    private lateinit var leagueName : String
+    private lateinit var dbref: DatabaseReference
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,19 +24,32 @@ class AdviceActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-    val leagueID = intent.getIntExtra(LEAGUE_ID_EXTRA  , -1)
+        leagueName = intent.getStringExtra("LEAGUE_NAME")!!
 
-    league = leagueFromID(leagueID)!!
-
-}
-
-private fun leagueFromID(leagueID: Int): League? {
-    for (league in leagueList) {
-        if (league.id == leagueID)
-            return league
     }
-    return null
-}
+
+    private fun getLeagueData(){
+        auth = requireNotNull(FirebaseAuth.getInstance())
+        val email = auth.currentUser?.email
+        val key = email?.substring(0, email.indexOf('@'))
+        dbref = FirebaseDatabase.getInstance().getReference("users/$key/leagues/$leagueName")
+
+        dbref.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    val league = snapshot.child("leagueName").value
+                    val team = snapshot.child("teamName").value
+                    // when the JSON IS READY. THIS CAN CHANGE TO val league = snapshot.getValue(League::class.java)
+                    this@AdviceActivity.league = (League(league.toString(),team.toString(), arrayListOf<Player>()))
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
 
     fun sellStrongWeak()  {
         // find first empty team

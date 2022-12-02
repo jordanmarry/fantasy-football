@@ -41,7 +41,7 @@ class ImportLeagueFragment: Fragment() {
                    playerList.add(0, currPlayerObject)
                 }
 
-                database.child("users").child(key!!).child("leagues").child(leagueName).setValue(League(leagueName, teamName, "record", 0, playerList))
+                database.child("users").child(key!!).child("leagues").child(leagueName).setValue(League(leagueName, teamName, playerList))
 
 
                 
