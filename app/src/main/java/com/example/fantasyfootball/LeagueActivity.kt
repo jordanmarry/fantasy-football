@@ -16,14 +16,21 @@ class LeagueActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val adviceButton = binding.advice
+        val leagueID = intent.getIntExtra(LEAGUE_ID_EXTRA  , -1)
+        val league = leagueFromID(leagueID)
 
-        adviceButton.setOnClickListener{
-            startActivity(Intent(this, AdviceActivity::class.java))
+        val intent = Intent(this, AdviceActivity::class.java)
+        if (league != null) {
+            intent.putExtra(LEAGUE_ID_EXTRA, league.id)
         }
 
-        val leagueID = intent.getIntExtra(LEAGUE_ID_EXTRA  , -1)
+        adviceButton.setOnClickListener{
+            startActivity(intent)
 
-        val league = leagueFromID(leagueID)
+        }
+
+
+
 
         if (league != null){
             binding.leagueName.text = league.leagueName
