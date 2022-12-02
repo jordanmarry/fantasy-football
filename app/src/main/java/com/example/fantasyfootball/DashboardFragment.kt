@@ -18,8 +18,6 @@ class DashboardFragment : Fragment(), LeagueClickListener {
         savedInstanceState: Bundle?
     ): View {
 
-        createLeagues()
-
         // creating the binding root
         val binding = DashboardFragmentBinding.inflate(inflater, container, false)
 
@@ -44,54 +42,5 @@ class DashboardFragment : Fragment(), LeagueClickListener {
         startActivity(intent)
     }
 
-    private fun createLeagues() {
-        var writer = ReadAndWriteData()
 
-        val league1 = League(
-            "Jared",
-            "Can't Read7",
-            "12"
-        )
-        leagueList.add(league1)
-        writer.writeLeague(league1)
-
-        val league2 = League(
-            "Wared2",
-            "Can't Read6",
-            "11"
-        )
-        writer.writeLeague(league2)
-        leagueList.add(league2)
-        val league3 = League(
-            "Rared3",
-            "Can't Read5",
-            "13"
-        )
-        writer.writeLeague(league3)
-        leagueList.add(league3)
-        val league4 = League(
-            "Fared4",
-            "Can't Read4",
-            "14"
-        )
-        leagueList.add(league4)
-        val league5 = League(
-            "Dared5",
-            "Can't Read3",
-            "15"
-        )
-        leagueList.add(league5)
-        val league6 = League(
-            "Qared6",
-            "Can't Read2",
-            "16"
-        )
-        leagueList.add(league6)
-        val league7 = League(
-            "Kared7",
-            "Can't Read1",
-            "17"
-        )
-        leagueList.add(league7)
-    }
 }
