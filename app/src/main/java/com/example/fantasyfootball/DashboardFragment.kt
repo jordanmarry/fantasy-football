@@ -22,10 +22,6 @@ class DashboardFragment : Fragment(), LeagueClickListener {
     private lateinit var leagueArrayList: ArrayList<League>
     private lateinit var auth: FirebaseAuth
 
-    fun getValue(): ArrayList<League> {
-        return leagueArrayList
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,7 +30,7 @@ class DashboardFragment : Fragment(), LeagueClickListener {
         // Use the provided ViewBinding class to inflate the layout.
         binding = DashboardFragmentBinding.inflate(inflater, container, false)
 
-        leagueRecyclerView = binding.recyclerView2
+        leagueRecyclerView = binding.recyclerView
 
         leagueRecyclerView.layoutManager = GridLayoutManager(activity,2)
 
