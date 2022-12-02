@@ -38,4 +38,7 @@
     <string name="nfl_team_and_percentage">NFL Team and Percentage</string>
     <string name="top_5_most_rostered_players"><u><b>Top 5 Most Rostered Players</b></u></string>
     <string name="top_position_players"><u><b>Top Position Players</b></u></string>
+    <string name="playernameplaceholder">PlayerNamePlaceHolder</string>
+    <string name="positionplaceholder">PositionPlaceHolder</string>
+    <string name="points_per_game">Points Per Game</string>
 </resources>
