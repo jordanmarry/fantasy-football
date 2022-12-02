@@ -1,11 +1,12 @@
 package com.example.fantasyfootball
 
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import android.util.Log
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
+
 
 class ReadAndWriteData {
 
@@ -57,4 +58,5 @@ class ReadAndWriteData {
         // Add to database
         database.child("players").child(key).setValue(player)
     }
+
 }

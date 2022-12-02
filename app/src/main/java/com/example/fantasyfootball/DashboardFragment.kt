@@ -1,97 +1,83 @@
 package com.example.fantasyfootball
 
+import android.R
 import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.fantasyfootball.databinding.DashboardFragmentBinding
-import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
+
 
 class DashboardFragment : Fragment(), LeagueClickListener {
+    private lateinit var binding: DashboardFragmentBinding
+    private lateinit var dbref: DatabaseReference
+    private lateinit var leagueRecyclerView: RecyclerView
+    private lateinit var leagueArrayList: ArrayList<League>
+    private lateinit var auth: FirebaseAuth
+
+    fun getValue(): ArrayList<League> {
+        return leagueArrayList
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // Use the provided ViewBinding class to inflate the layout.
+        binding = DashboardFragmentBinding.inflate(inflater, container, false)
 
-        createLeagues()
+        leagueRecyclerView = binding.recyclerView2
 
-        // creating the binding root
-        val binding = DashboardFragmentBinding.inflate(inflater, container, false)
+        leagueRecyclerView.layoutManager = GridLayoutManager(activity,2)
 
-        val act = this
+        leagueArrayList = arrayListOf<League>()
 
-        binding.recyclerView2.apply {
-            layoutManager = GridLayoutManager(activity,2)
-            adapter = LeagueAdapter(leagueList, act)
-        }
+        getLeagueData( )
 
-        binding.overview.setOnClickListener{
-            findNavController().navigate(
-                R.id.action_dashboardFragment_to_overviewFragment
-            )
-        }
-
+        // Return the root view.
         return binding.root
+    }
 
-    } override fun onClick(league: League) {
+    override fun onClick(league: League) {
         val intent = Intent(activity, LeagueActivity::class.java)
-        intent.putExtra(LEAGUE_ID_EXTRA, league.id)
+        intent.putExtra("LEAGUE_NAME", league.leagueName)
         startActivity(intent)
     }
 
-    private fun createLeagues() {
-        var writer = ReadAndWriteData()
+    private fun getLeagueData() {
+        auth = requireNotNull(FirebaseAuth.getInstance())
+        val email = auth.currentUser?.email
+        val key = email?.substring(0, email.indexOf('@'))
+        dbref = FirebaseDatabase.getInstance().getReference("users/$key/leagues")
 
-        val league1 = League(
-            "Jared",
-            "Can't Read7",
-            "12"
-        )
-        leagueList.add(league1)
-        writer.writeLeague(league1)
+        dbref.addValueEventListener(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    for(leagueSnapshot in snapshot.children){
+                        val league = leagueSnapshot.child("leagueName").value
+                        val team = leagueSnapshot.child("teamName").value
+                        // when the JSON IS READY. THIS CAN CHANGE TO val league = snapshot.getValue(League::class.java)
+                        leagueArrayList.add(League(league.toString(),team.toString(), arrayListOf<Player>()))
 
-        val league2 = League(
-            "Wared2",
-            "Can't Read6",
-            "11"
-        )
-        writer.writeLeague(league2)
-        leagueList.add(league2)
-        val league3 = League(
-            "Rared3",
-            "Can't Read5",
-            "13"
-        )
-        writer.writeLeague(league3)
-        leagueList.add(league3)
-        val league4 = League(
-            "Fared4",
-            "Can't Read4",
-            "14"
-        )
-        leagueList.add(league4)
-        val league5 = League(
-            "Dared5",
-            "Can't Read3",
-            "15"
-        )
-        leagueList.add(league5)
-        val league6 = League(
-            "Qared6",
-            "Can't Read2",
-            "16"
-        )
-        leagueList.add(league6)
-        val league7 = League(
-            "Kared7",
-            "Can't Read1",
-            "17"
-        )
-        leagueList.add(league7)
+                    }
+                    leagueRecyclerView.adapter = LeagueAdapter(leagueArrayList, this@DashboardFragment)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
+
+
 }
