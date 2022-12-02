@@ -39,6 +39,8 @@ class MainFragment: Fragment() {
                 R.id.action_mainFragment_to_forgotPasswordFragment
             )
         }
+
+        viewModel.clearPlayerList()
         viewModel.sendNetworkRequest()
         return binding.root
     }

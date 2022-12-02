@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
@@ -21,6 +24,8 @@ class NetworkViewModel() : ViewModel() {
     /** Modifiable live data for internal use only. */
     private val _statusLiveData = MutableLiveData<Status>()
     private var writer = ReadAndWriteData()
+    private lateinit var database: DatabaseReference
+
     /** Immutable LiveData for external publishing/observing. */
     val statusLiveData: LiveData<Status>
         get() = _statusLiveData
@@ -32,6 +37,20 @@ class NetworkViewModel() : ViewModel() {
         data class Progress(val progress: Int) : Status()
         data class Result(val list: List<String>) : Status()
         data class Error(val errorResId: Int, val e: Exception) : Status()
+    }
+
+    fun clearPlayerList(){
+        database = FirebaseDatabase.getInstance().getReference("players")
+        database.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.ref.removeValue()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
     /**
