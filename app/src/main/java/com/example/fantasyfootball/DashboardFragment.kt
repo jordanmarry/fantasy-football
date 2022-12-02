@@ -1,13 +1,12 @@
 package com.example.fantasyfootball
 
-import android.R
 import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.fantasyfootball.databinding.DashboardFragmentBinding
@@ -38,6 +37,11 @@ class DashboardFragment : Fragment(), LeagueClickListener {
 
         getLeagueData( )
 
+        binding.overview.setOnClickListener{
+            findNavController().navigate(
+                R.id.action_dashboardFragment_to_overviewFragment
+            )
+        }
         // Return the root view.
         return binding.root
     }

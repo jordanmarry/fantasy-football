@@ -1,6 +1,5 @@
 package com.example.fantasyfootball
 
-import AdviceActivity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -28,7 +27,7 @@ class LeagueActivity : AppCompatActivity() {
 
         binding.advice.setOnClickListener{
             val intent = Intent(this, AdviceActivity::class.java)
-            intent.putExtra("LEAGUE_NAME", leagueName)
+//            intent.putExtra("LEAGUE_NAME", leagueName)
             startActivity(intent)
         }
 

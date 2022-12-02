@@ -1,10 +1,9 @@
+package com.example.fantasyfootball
+
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.example.fantasyfootball.League
-import com.example.fantasyfootball.Player
 import com.example.fantasyfootball.databinding.ActivityAdviceBinding
-import com.example.fantasyfootball.databinding.ActivityLeagueBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
@@ -21,10 +20,9 @@ class AdviceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAdviceBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
 
-        leagueName = intent.getStringExtra("LEAGUE_NAME")!!
+//        leagueName = intent.getStringExtra("LEAGUE_NAME")!!
 
     }
 
