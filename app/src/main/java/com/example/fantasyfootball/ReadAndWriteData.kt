@@ -29,7 +29,7 @@ class ReadAndWriteData {
         val key = email?.substring(0, email.indexOf('@'))
         database = Firebase.database.reference
         database.child("users").child(key!!).child("leagues")
-            .child(league.leagueName).setValue(league)
+            .child(league.leagueName!!).setValue(league)
 
     }
 

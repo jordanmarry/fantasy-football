@@ -10,7 +10,7 @@ import com.example.fantasyfootball.databinding.ActivityLeagueBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
-class LeagueActivity : AppCompatActivity() {
+class LeagueActivity : AppCompatActivity(), PlayerClickListener {
 
     private lateinit var binding : ActivityLeagueBinding
     private lateinit var leagueName : String
@@ -38,6 +38,14 @@ class LeagueActivity : AppCompatActivity() {
         getLeagueData()
     }
 
+    override fun onClick(player: Player) {
+        val intent = Intent(this, PlayerActivity::class.java)
+        val name = player.name!!.replace(".","")
+        val str = player.pos + "-" + name + "-" + player.team
+        intent.putExtra("PLAYER", str)
+        startActivity(intent)
+    }
+
     private fun getLeagueData(){
         auth = requireNotNull(FirebaseAuth.getInstance())
         val email = auth.currentUser?.email
@@ -47,11 +55,13 @@ class LeagueActivity : AppCompatActivity() {
         dbref.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
-                    // when the JSON IS READY. THIS CAN CHANGE TO val league = snapshot.getValue(League::class.java)
-                    binding.leagueName.text =  snapshot.child("leagueName").value.toString()
-                    binding.teamName.text = snapshot.child("teamName").value.toString()
+                    val league = snapshot.getValue(League::class.java)!!
+
+                    binding.leagueName.text = league.leagueName
+                    binding.teamName.text = league.teamName
 
                     // NOW BASICALLY TAKE THE PLAYERS LIST AND CREATE ALL THE PLAYER CELL CARDS
+                    playerRecyclerView.adapter = PlayerAdapter(league.playerList!!, this@LeagueActivity, this@LeagueActivity)
                 }
             }
 

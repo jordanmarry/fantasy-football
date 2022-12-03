@@ -1,7 +1,7 @@
 package com.example.fantasyfootball
 
 data class League (
-    var leagueName: String,
-    var teamName: String,
-    var playerList: ArrayList<Player>
+    var leagueName: String? = null,
+    var teamName: String? = null,
+    var playerList: ArrayList<Player>? = arrayListOf<Player>()
 )

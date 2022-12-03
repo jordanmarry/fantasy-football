@@ -61,7 +61,7 @@ class AdviceActivity : AppCompatActivity() {
 
         val key = email?.substring(0, email.indexOf('@'))
 
-        val usersPlayers = database.child("users").child(key!!).child("leagues").child(league.leagueName).child("players") as ArrayList<Player>
+        val usersPlayers = database.child("users").child(key!!).child("leagues").child(league.leagueName!!).child("players") as ArrayList<Player>
         var sellPlayerList = ArrayList<Player>()
         var strongPlayerList = ArrayList<ArrayList<Player>>()
         var weakPlayerList = ArrayList<ArrayList<Player>>()
@@ -71,14 +71,14 @@ class AdviceActivity : AppCompatActivity() {
         var tePlayerList = ArrayList<Player>()
 
         for (p in usersPlayers){
-            if((p.snapShare) < 0.55){
+            if((p.snapShare)!! < 0.55){
                 sellPlayerList.add(p)
             }
             if (p.pos == "QB"){
                 if(qbPlayerList.isEmpty()){
                     qbPlayerList.add(p)
                 } else {
-                    if (p.ffPoints > qbPlayerList[0].ffPoints){
+                    if (p.ffPoints!! > qbPlayerList[0].ffPoints!!){
                         qbPlayerList.clear()
                         qbPlayerList.add(p)
                     }
@@ -89,11 +89,11 @@ class AdviceActivity : AppCompatActivity() {
                 } else {
                     var min = rbPlayerList[0]
                     for(i in rbPlayerList){
-                        if(min.ffPoints < i.ffPoints){
+                        if(min.ffPoints!! < i.ffPoints!!){
                             min = i
                         }
                     }
-                    if(min.ffPoints < p.ffPoints){
+                    if(min.ffPoints!! < p.ffPoints!!){
                         rbPlayerList.remove(min)
                         rbPlayerList.add(p)
                     }
@@ -104,11 +104,11 @@ class AdviceActivity : AppCompatActivity() {
                 } else {
                     var min = wrPlayerList[0]
                     for(i in wrPlayerList){
-                        if(min.ffPoints < i.ffPoints){
+                        if(min.ffPoints!! < i.ffPoints!!){
                             min = i
                         }
                     }
-                    if(min.ffPoints < p.ffPoints){
+                    if(min.ffPoints!! < p.ffPoints!!){
                         wrPlayerList.remove(min)
                         wrPlayerList.add(p)
                     }
@@ -117,7 +117,7 @@ class AdviceActivity : AppCompatActivity() {
                 if(tePlayerList.isEmpty()){
                     tePlayerList.add(p)
                 } else {
-                    if (p.ffPoints > tePlayerList[0].ffPoints){
+                    if (p.ffPoints!! > tePlayerList[0].ffPoints!!){
                         tePlayerList.clear()
                         tePlayerList.add(p)
                     }
@@ -130,7 +130,7 @@ class AdviceActivity : AppCompatActivity() {
             for (i in 1..3) {
                 var best = sellPlayerList[0]
                 for(p in sellPlayerList){
-                    if(best.ffPoints < p.ffPoints){
+                    if(best.ffPoints!! < p.ffPoints!!){
                         best = p
                     }
                 }
@@ -142,7 +142,7 @@ class AdviceActivity : AppCompatActivity() {
 
 
 
-        if(qbPlayerList.isNotEmpty() && qbPlayerList[0].ppg >= 18) {
+        if(qbPlayerList.isNotEmpty() && qbPlayerList[0].ppg!! >= 18) {
             strongPlayerList.add(qbPlayerList)
         } else {
             weakPlayerList.add(qbPlayerList)
@@ -150,7 +150,7 @@ class AdviceActivity : AppCompatActivity() {
         if(rbPlayerList.isNotEmpty()){
             var totalPPG = 0.0
             for(i in rbPlayerList){
-                totalPPG += i.ppg
+                totalPPG += i.ppg!!
             }
             totalPPG /= rbPlayerList.size
             if(totalPPG >= 12){
@@ -164,7 +164,7 @@ class AdviceActivity : AppCompatActivity() {
         if(wrPlayerList.isNotEmpty()){
             var totalPPG = 0.0
             for(i in wrPlayerList){
-                totalPPG += i.ppg
+                totalPPG += i.ppg!!
             }
             totalPPG /= wrPlayerList.size
             if(totalPPG >= 12){
@@ -175,7 +175,7 @@ class AdviceActivity : AppCompatActivity() {
         } else {
             weakPlayerList.add(wrPlayerList)
         }
-        if(tePlayerList.isNotEmpty() && tePlayerList[0].ppg >= 18) {
+        if(tePlayerList.isNotEmpty() && tePlayerList[0].ppg!! >= 18) {
             strongPlayerList.add(tePlayerList)
         } else {
             weakPlayerList.add(tePlayerList)
