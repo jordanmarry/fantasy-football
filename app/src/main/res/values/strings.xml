@@ -41,4 +41,46 @@
     <string name="playernameplaceholder">PlayerNamePlaceHolder</string>
     <string name="positionplaceholder">PositionPlaceHolder</string>
     <string name="points_per_game">Points Per Game</string>
+
+    <string-array name="teams">
+        <item>ARI</item>
+        <item>ATL</item>
+        <item>BAL</item>
+        <item>BUF</item>
+        <item>CAR</item>
+        <item>CHI</item>
+        <item>CIN</item>
+        <item>CLE</item>
+        <item>DAL</item>
+        <item>DEN</item>
+        <item>DET</item>
+        <item>GB</item>
+        <item>HOU</item>
+        <item>IND</item>
+        <item>JAX</item>
+        <item>KC</item>
+        <item>MIA</item>
+        <item>NE</item>
+        <item>NO</item>
+        <item>NYG</item>
+        <item>NYJ</item>
+        <item>LV</item>
+        <item>PHI</item>
+        <item>PIT</item>
+        <item>LAC</item>
+        <item>SF</item>
+        <item>SEA</item>
+        <item>LAR</item>
+        <item>TB</item>
+        <item>TEN</item>
+        <item>WAS</item>
+    </string-array>
+
+    <string-array name="positions">
+        <item>QB</item>
+        <item>RB</item>
+        <item>WR</item>
+        <item>TE</item>
+        <item>K</item>
+    </string-array>
 </resources>
