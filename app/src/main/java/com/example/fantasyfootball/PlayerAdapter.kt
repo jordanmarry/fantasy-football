@@ -32,15 +32,15 @@ class PlayerAdapter (private val players: List<Player>, private val clickListene
             val name = player.name
             val team = player.team
             val ffpoints = player.ffPoints
-            val snapshare = player.snapShare
-            val ss = String.format("%.3f", snapshare)
+            val snapshare = player.snapShare!! * 100
+            val ss = String.format("%.2f", snapshare)
             val ppg = player.ppg
             val ppg2 = String.format("%.3f", ppg)
             playerCardCellBinding.position.text = "Position: $pos"
             playerCardCellBinding.playerName.text = "Name: $name"
             playerCardCellBinding.teamName.text = "Team Name: $team"
             playerCardCellBinding.FFPoints.text = "FFPoints: $ffpoints"
-            playerCardCellBinding.SnapShare.text = "Snap Share: $ss"
+            playerCardCellBinding.SnapShare.text = "Snap Share: $ss%"
             playerCardCellBinding.PPG.text = "PPG: $ppg2"
             playerCardCellBinding.cardView.setOnClickListener{
                 clickListener.onClick(player)

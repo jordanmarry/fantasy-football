@@ -1,18 +1,17 @@
 package com.example.fantasyfootball
 
 import android.os.Bundle
+import android.text.SpannableStringBuilder
 import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.bold
 import androidx.core.view.setPadding
 import com.example.fantasyfootball.databinding.ActivityPlayerBinding
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import org.w3c.dom.Text
 
 class PlayerActivity : AppCompatActivity(){
     private lateinit var binding : ActivityPlayerBinding
@@ -26,11 +25,15 @@ class PlayerActivity : AppCompatActivity(){
 
         playerDB = intent.getStringExtra("PLAYER")!!
 
+        Log.d("PLAYERACT", playerDB)
+
         getPlayerData()
     }
 
     private fun getPlayerData(){
         dbref = FirebaseDatabase.getInstance().getReference("players/$playerDB")
+
+        Log.d("PLAYERACT", dbref.toString())
 
         dbref.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -39,7 +42,10 @@ class PlayerActivity : AppCompatActivity(){
                     for(playerSnapshot in snapshot.children){
                         if (playerSnapshot.key!! != "team" && playerSnapshot.key!! != "name" && playerSnapshot.key!! != "pos"){
                             val textView = TextView(this@PlayerActivity)
-                            textView.text = playerSnapshot.key!! + ": " + playerSnapshot.value.toString()
+                            val s = SpannableStringBuilder()
+                                .bold { append(playerSnapshot.key!! + ": ") }
+                                .append(playerSnapshot.value.toString())
+                            textView.text = s
                             textView.layoutParams = LinearLayout.LayoutParams(
                                 LinearLayout.LayoutParams.MATCH_PARENT,
                                 LinearLayout.LayoutParams.WRAP_CONTENT)
