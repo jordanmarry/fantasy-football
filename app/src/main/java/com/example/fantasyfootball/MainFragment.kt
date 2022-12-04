@@ -40,8 +40,8 @@ class MainFragment: Fragment() {
             )
         }
 
-        viewModel.clearPlayerList()
-        viewModel.sendNetworkRequest()
+//        viewModel.clearPlayerList()
+//        viewModel.sendNetworkRequest()
         return binding.root
     }
 

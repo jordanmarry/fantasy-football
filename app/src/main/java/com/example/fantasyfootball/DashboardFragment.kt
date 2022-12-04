@@ -2,6 +2,7 @@ package com.example.fantasyfootball
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,10 +63,9 @@ class DashboardFragment : Fragment(), LeagueClickListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     for(leagueSnapshot in snapshot.children){
-                        val league = leagueSnapshot.child("leagueName").value
-                        val team = leagueSnapshot.child("teamName").value
+                        val league = leagueSnapshot.getValue(League::class.java)!!
                         // when the JSON IS READY. THIS CAN CHANGE TO val league = snapshot.getValue(League::class.java)
-                        leagueArrayList.add(League(league.toString(),team.toString(), arrayListOf<Player>()))
+                        leagueArrayList.add(league)
 
                     }
                     leagueRecyclerView.adapter = LeagueAdapter(leagueArrayList, this@DashboardFragment)
@@ -78,6 +78,5 @@ class DashboardFragment : Fragment(), LeagueClickListener {
 
         })
     }
-
 
 }

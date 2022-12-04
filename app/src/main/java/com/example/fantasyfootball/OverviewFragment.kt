@@ -39,20 +39,21 @@ class OverviewFragment : Fragment() {
         val allTeams = HashMap<String, Int>()
         val bestPlayers = HashMap<String, Player>()
 
+        // probs need to change wont lie
         val leagueList = database.child("users").child(key!!).child("leagues") as ArrayList<League>
 
         for(l in leagueList){
-            for(p in l.playerList){
+            for(p in l.playerList!!){
                 var count = mostOwned.get(p) as Int
                 count += 1
                 mostOwned.put(p, count)
                 var teamCount = allTeams.get(p.team) as Int
                 teamCount += 1
-                allTeams.put(p.team, teamCount)
-                if(bestPlayers.containsKey(p.pos) && bestPlayers.get(p.pos)!!.ffPoints < p.ffPoints){
-                    bestPlayers.put(p.pos, p)
+                allTeams.put(p.team!!, teamCount)
+                if(bestPlayers.containsKey(p.pos) && bestPlayers.get(p.pos)!!.ffPoints!! < p.ffPoints!!){
+                    bestPlayers.put(p.pos!!, p)
                 } else if (!bestPlayers.containsKey(p.pos)){
-                    bestPlayers.put(p.pos, p)
+                    bestPlayers.put(p.pos!!, p)
                 }
             }
         }

@@ -38,10 +38,18 @@
     <string name="nfl_team_and_percentage">NFL Team and Percentage</string>
     <string name="top_5_most_rostered_players"><u><b>Top 5 Most Rostered Players</b></u></string>
     <string name="top_position_players"><u><b>Top Position Players</b></u></string>
-    <string name="playernameplaceholder">PlayerNamePlaceHolder</string>
-    <string name="positionplaceholder">PositionPlaceHolder</string>
-    <string name="points_per_game">Points Per Game</string>
 
+    <string name="playernameplaceholder">PlayerNamePlaceHolder</string>
+    <string name="playerNamePlaceHolderString">Player Name: %s</string>
+    <string name="positionplaceholder">PositionPlaceHolder</string>
+    <string name="positionplaceholderString">Position: %s</string>
+    <string name="points_per_game">Points Per Game</string>
+    <string name="points_per_game_string">Points Per Game: %d</string>
+    <string name="snapshare">SnapShare</string>
+    <string name="snapsharestring">Snap Share: %d</string>
+    <string name="ffpoints">FFPoints</string>
+    <string name="ffpoints_string">FFPoints: %d</string>
+    <string name="player_name">Player Name</string>
     <string-array name="teams">
         <item>ARI</item>
         <item>ATL</item>
