@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import android.widget.AdapterView.OnItemLongClickListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
 
 class rosterInput : Activity() {
     // variable declarations
@@ -14,6 +16,7 @@ class rosterInput : Activity() {
     private var players: ArrayList<String>? = null
     private var itemsAdapter: ArrayAdapter<String>? = null
     private var lvItems: ListView? = null
+    private lateinit var database: DatabaseReference
 
     // on confirmation
     private val positiveButtonClick = { dialog: DialogInterface, which: Int ->
@@ -76,7 +79,7 @@ class rosterInput : Activity() {
         if (checkName(fName) && checkName(lName)) {
             // format for API
             var fC = fName[0]
-            var player = "${getPos()}-$fC.$lName-${getTeam()}"
+            var player = "${getPos()}-$fC$lName-${getTeam()}"
             // display player
             itemsAdapter!!.add("$fName $lName")
             // reset view
@@ -179,5 +182,30 @@ class rosterInput : Activity() {
         val teamName = tName.text.toString()
         val leagueName = lName.text.toString()
         // TODO: make call to jeremy's function --> import(league, team, players)
+        createPlayerList(leagueName, teamName, players!!)
+
+    }
+
+    private fun createPlayerList(leagueName: String, teamName: String, playersIn: java.util.ArrayList<String>)  {
+        // find first empty team
+        // database = FirebaseDatabase.getInstance().getReference("users")
+
+        // get the current user and check to see their first empty team slot
+        // once found, go through playersIn and find each player in the players database
+        // then add the player obj to playerList, then add playerList to the first empty team
+        val auth = requireNotNull(FirebaseAuth.getInstance())
+        val email = auth.currentUser?.email
+        val key = email?.substring(0, email.indexOf('@'))
+
+        val playerList = java.util.ArrayList<Player>()
+        for (currPlayer in playersIn) {
+            // find currPlayer in players database
+            val currPlayerObject = database.child("players").child(currPlayer) as Player
+
+            playerList.add(0, currPlayerObject)
+        }
+
+        database.child("users").child(key!!).child("leagues").child(leagueName).setValue(League(leagueName, teamName, playerList))
+
     }
 }
