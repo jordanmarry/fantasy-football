@@ -43,6 +43,12 @@ class DashboardFragment : Fragment(), LeagueClickListener {
                 R.id.action_dashboardFragment_to_overviewFragment
             )
         }
+
+        binding.createLeague.setOnClickListener {
+            val intent = Intent(activity, RosterInputActivity::class.java)
+            startActivity(intent)
+        }
+
         // Return the root view.
         return binding.root
     }

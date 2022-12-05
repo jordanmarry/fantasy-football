@@ -10,7 +10,7 @@ import android.widget.AdapterView.OnItemLongClickListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 
-class rosterInput : Activity() {
+class RosterInputActivity : Activity() {
     // variable declarations
     private var items: ArrayList<String>? = null
     private var players: ArrayList<String>? = null
@@ -27,7 +27,7 @@ class rosterInput : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.rosterinput)
+        setContentView(R.layout.activity_rosterinput)
 
         // list view adapter
         lvItems = findViewById<View>(R.id.lvItems) as ListView
