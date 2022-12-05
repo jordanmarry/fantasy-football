@@ -71,7 +71,7 @@ class AdviceActivity : AppCompatActivity(), PlayerClickListener{
         var tePlayerList = ArrayList<Player>()
 
         for (p in usersPlayers){
-            if((p.snapShare)!! < 0.55){
+            if((p.snapShare)!! < 0.55 && p.pos != "K") {
                 sellPlayerList.add(p)
             }
             if (p.pos == "QB"){
