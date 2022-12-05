@@ -4,26 +4,22 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.renderscript.Sampler
+import android.util.Log
 import android.view.View
 import android.widget.*
 import android.widget.AdapterView.OnItemLongClickListener
+import androidx.core.view.isVisible
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.*
 
 class RosterInputActivity : Activity() {
     // variable declarations
-    private var items: ArrayList<String>? = null
-    private var players: ArrayList<String>? = null
-    private var itemsAdapter: ArrayAdapter<String>? = null
-    private var lvItems: ListView? = null
+    private lateinit var items: ArrayList<String>
+    private lateinit var itemsAdapter: ArrayAdapter<String>
+    private lateinit var lvItems: ListView
     private lateinit var database: DatabaseReference
-
-    // on confirmation
-    private val positiveButtonClick = { dialog: DialogInterface, which: Int ->
-        submitRoster()
-        clearView()
-    }
-    private val negativeButtonClick = { dialog: DialogInterface, which: Int -> }
+    private lateinit var leagueName: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +27,8 @@ class RosterInputActivity : Activity() {
 
         // list view adapter
         lvItems = findViewById<View>(R.id.lvItems) as ListView
-        items = ArrayList()
+        items = arrayListOf<String>()
+
         itemsAdapter = ArrayAdapter(
             this, android.R.layout.simple_list_item_1, items!!
         )
@@ -41,13 +38,17 @@ class RosterInputActivity : Activity() {
         var psSp = findViewById<Spinner>(R.id.posSpinner) as Spinner
         var tmSp = findViewById<Spinner>(R.id.teamSpinner) as Spinner
 
-        val posAdapter = ArrayAdapter.createFromResource(this,
-            R.array.positions, android.R.layout.simple_spinner_item)
+        val posAdapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.positions, android.R.layout.simple_spinner_item
+        )
         posAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         psSp.adapter = posAdapter
 
-        val teamAdapter = ArrayAdapter.createFromResource(this,
-            R.array.teams, android.R.layout.simple_spinner_item)
+        val teamAdapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.teams, android.R.layout.simple_spinner_item
+        )
         teamAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         tmSp.adapter = teamAdapter
 
@@ -62,6 +63,11 @@ class RosterInputActivity : Activity() {
                 // remove the player at pos
             OnItemLongClickListener { adapter, item, pos, id ->
                 items!!.removeAt(pos)
+
+                //
+                // could implement delete from DB but if too much work delete
+                //
+
                 // refresh the adapter
                 itemsAdapter!!.notifyDataSetChanged()
                 true
@@ -71,26 +77,74 @@ class RosterInputActivity : Activity() {
 
     // add button
     fun onAddItem(v: View?) {
-        val etNewItem = findViewById<View>(R.id.etNewItem) as EditText
+        val etNewItem = findViewById<View>(R.id.fName) as EditText
         val etNewItem2 = findViewById<View>(R.id.lName) as EditText
         val fName = etNewItem.text.toString()
         val lName = etNewItem2.text.toString()
         // check for player name via regex
         if (checkName(fName) && checkName(lName)) {
             // format for API
-            var fC = fName[0]
-            var player = "${getPos()}-$fC$lName-${getTeam()}"
+            val fC = fName[0]
+            val player = "${getPos()}-$fC$lName-${getTeam()}"
             // display player
             itemsAdapter!!.add("$fName $lName")
             // reset view
             etNewItem.setText("")
             etNewItem2.setText("")
             // add formatted name
-            players?.add(player)
+
+            database = FirebaseDatabase.getInstance()
+                .getReference("players")
+
+            database.addListenerForSingleValueEvent(object: ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for(snapshot in snapshot.children){
+                        if (snapshot.key!! == player) {
+                            Log.d("HERE", snapshot.key!!)
+                            val p = snapshot.getValue(Player::class.java)!!
+                            addPlayer(p)
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
+            })
+
         } else {
             // throw notification if non-matching
             Toast.makeText(applicationContext, "Invalid Name Format", Toast.LENGTH_LONG).show()
         }
+
+    }
+
+    private fun addPlayer(player: Player) {
+        val auth = requireNotNull(FirebaseAuth.getInstance())
+        val email = auth.currentUser?.email
+        val key = email?.substring(0, email.indexOf('@'))
+
+        database = FirebaseDatabase.getInstance()
+            .getReference("users/$key/leagues/$leagueName")
+        database.addListenerForSingleValueEvent(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val arr = arrayListOf<Player>()
+                for (i in snapshot.child("playerList").children){
+                    val p = i.getValue(Player::class.java)!!
+                    arr.add(p)
+                }
+                arr.add(player)
+
+                database.child("playerList").setValue(arr)
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
 
@@ -106,13 +160,6 @@ class RosterInputActivity : Activity() {
     }
 
 
-//    // check player name
-//    private fun checkFirst(pname: String): Boolean {
-//        //var reg = Regex("(([A-Z]\\.?\\s?)*([A-Z][a-z]+\\.?\\s?)+([A-Z]\\.?\\s?[a-z]*)*)")
-//        var reg2 = Regex("[A-Z]+[a-zA-Z]+")
-//        return pname.matches(reg2)
-//    }
-
     private fun checkName(pname: String): Boolean {
         var reg = Regex("[A-Z]+.+")
         return pname.matches(reg)
@@ -124,17 +171,65 @@ class RosterInputActivity : Activity() {
         val tName = findViewById<View>(R.id.teamName) as EditText
         val lName = findViewById<View>(R.id.leagueName) as EditText
         val teamName = tName.text.toString()
-        val leagueName = lName.text.toString()
+        leagueName = lName.text.toString()
         // check team and league names are supplied
         if (teamName.isNullOrEmpty()) {
-            Toast.makeText(applicationContext, "Please add your team name",
-                Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                applicationContext, "Please add your team name",
+                Toast.LENGTH_LONG
+            ).show()
         } else if (leagueName.isNullOrEmpty()) {
-            Toast.makeText(applicationContext, "Please add your league name",
-                Toast.LENGTH_LONG).show()
-        } else {
-            submitAlert()
+            Toast.makeText(
+                applicationContext, "Please add your league name",
+                Toast.LENGTH_LONG
+            ).show()
         }
+
+        // add league and team name to DB
+        Toast.makeText(applicationContext, "Added League and Team", Toast.LENGTH_LONG).show()
+        v!!.visibility = View.GONE
+
+        tName.inputType = 0
+        tName.isFocusable = false
+        tName.isFocusableInTouchMode = false
+        tName.isClickable = false
+
+        lName.inputType = 0
+        lName.isFocusable = false
+        lName.isFocusableInTouchMode = false
+        lName.isClickable = false
+
+        findViewById<View>(R.id.teamName).visibility = View.GONE
+        findViewById<View>(R.id.leagueName).visibility = View.GONE
+
+
+        findViewById<View>(R.id.fName).visibility = View.VISIBLE
+        findViewById<View>(R.id.lName).visibility = View.VISIBLE
+        findViewById<View>(R.id.btnAddItem).visibility = View.VISIBLE
+        findViewById<View>(R.id.textView).visibility = View.VISIBLE
+        findViewById<View>(R.id.posSpinner).visibility = View.VISIBLE
+        findViewById<View>(R.id.textView2).visibility = View.VISIBLE
+        findViewById<View>(R.id.teamSpinner).visibility = View.VISIBLE
+        findViewById<View>(R.id.lvItems).visibility = View.VISIBLE
+        findViewById<View>(R.id.remove).visibility = View.VISIBLE
+        findViewById<View>(R.id.line1).visibility = View.VISIBLE
+        findViewById<View>(R.id.line2).visibility = View.VISIBLE
+
+
+        val auth = requireNotNull(FirebaseAuth.getInstance())
+        val email = auth.currentUser?.email
+        val key = email?.substring(0, email.indexOf('@'))
+
+
+
+        database = FirebaseDatabase.getInstance()
+            .getReference("users/$key/leagues/$leagueName")
+
+        val playerList = arrayListOf<Player>()
+
+        database.setValue(League(leagueName, teamName, playerList))
+
+
     }
 
 
@@ -144,7 +239,7 @@ class RosterInputActivity : Activity() {
         tName.setText("")
         val lName = findViewById<View>(R.id.leagueName) as EditText
         lName.setText("")
-        val firName = findViewById<View>(R.id.etNewItem) as EditText
+        val firName = findViewById<View>(R.id.fName) as EditText
         firName.setText("")
         val lasName = findViewById<View>(R.id.lName) as EditText
         lasName.setText("")
@@ -155,57 +250,7 @@ class RosterInputActivity : Activity() {
             this, android.R.layout.simple_list_item_1, items!!
         )
         lvItems!!.adapter = itemsAdapter
-        players?.clear()
     }
 
 
-    // submission confirmation
-    private fun submitAlert() {
-        val builder = AlertDialog.Builder(this)
-
-        with(builder)
-        {
-            setTitle("Confirmation")
-            setMessage("Are you sure you want to submit this roster?")
-            setPositiveButton("Yes", DialogInterface.OnClickListener(
-                function = positiveButtonClick))
-            setNegativeButton("No", negativeButtonClick)
-            show()
-        }
-    }
-
-
-    // submission after user confirmation
-    private fun submitRoster() {
-        val tName = findViewById<View>(R.id.teamName) as EditText
-        val lName = findViewById<View>(R.id.leagueName) as EditText
-        val teamName = tName.text.toString()
-        val leagueName = lName.text.toString()
-        // TODO: make call to jeremy's function --> import(league, team, players)
-        createPlayerList(leagueName, teamName, players!!)
-
-    }
-
-    private fun createPlayerList(leagueName: String, teamName: String, playersIn: java.util.ArrayList<String>)  {
-        // find first empty team
-        // database = FirebaseDatabase.getInstance().getReference("users")
-
-        // get the current user and check to see their first empty team slot
-        // once found, go through playersIn and find each player in the players database
-        // then add the player obj to playerList, then add playerList to the first empty team
-        val auth = requireNotNull(FirebaseAuth.getInstance())
-        val email = auth.currentUser?.email
-        val key = email?.substring(0, email.indexOf('@'))
-
-        val playerList = java.util.ArrayList<Player>()
-        for (currPlayer in playersIn) {
-            // find currPlayer in players database
-            val currPlayerObject = database.child("players").child(currPlayer) as Player
-
-            playerList.add(0, currPlayerObject)
-        }
-
-        database.child("users").child(key!!).child("leagues").child(leagueName).setValue(League(leagueName, teamName, playerList))
-
-    }
 }
