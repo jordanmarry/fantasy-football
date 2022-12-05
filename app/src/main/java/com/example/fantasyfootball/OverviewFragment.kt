@@ -123,12 +123,22 @@ class OverviewFragment : Fragment(), PlayerClickListener {
             allTeams.remove(mostOwnedTeam )
         }
 
-        val threeMostTeamsMap = HashMap<String, Double>()
+        val threeMostTeamsArr = arrayListOf<HashMap<String, Double>>()
 
         for (i in threeMostTeams){
-            threeMostTeamsMap[i] = ((allTeamsCopy[i]!!.toDouble()/full.toDouble())*100.0)
+            val hi = HashMap<String, Double>()
+            hi[i] = ((allTeamsCopy[i]!!.toDouble()/full.toDouble())*100.0)
+            threeMostTeamsArr.add(hi)
         }
-        // Potentially Make a Team Card. Team Card Class. Team Adapter Class. Team XML.
+
+        Log.d("HERE", threeMostTeamsArr.toString())
+
+        // Potentially Make a Team Card. Team Adapter Class.
+
+        val teamRecyclerView = binding.teamRecyclerView
+        val size = if (threeMostTeamsArr.size >= 3) 3 else threeMostTeamsArr.size
+        teamRecyclerView.layoutManager = GridLayoutManager(activity, size)
+        teamRecyclerView.adapter = TeamAdapter(threeMostTeamsArr, this@OverviewFragment.activity!!.applicationContext)
 
 
         // fiveMostOwned contains five most owned player objects across leagues
@@ -142,8 +152,6 @@ class OverviewFragment : Fragment(), PlayerClickListener {
         for (i in bestPlayers.keys) {
             bestPlayersArr.add(bestPlayers[i]!!)
         }
-
-        Log.d("HERE", bestPlayersArr.toString())
 
         val topPosRecyclerView = binding.topPosRecyclerView
         topPosRecyclerView.layoutManager = GridLayoutManager(activity,1)

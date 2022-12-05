@@ -37,50 +37,20 @@
                 android:text="@string/nfl_team_stake"
                 android:textColor="@color/black"/>
 
-            <TextView
-                android:id="@+id/stake1"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/teamRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="10dp"
-                android:textSize="17sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.494"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.1"
-                android:text="@string/nfl_team_and_percentage" />
+                app:layout_constraintVertical_bias="0.55"
+                android:nestedScrollingEnabled="false"
+                />
 
-            <TextView
-                android:id="@+id/stake2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="10dp"
-                android:textSize="17sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.494"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.1"
-                android:text="@string/nfl_team_and_percentage" />
 
-            <TextView
-                android:id="@+id/stake3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="10dp"
-                android:textSize="17sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.494"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.1"
-                android:text="@string/nfl_team_and_percentage" />
 
             <TextView
                 android:id="@+id/top5"
