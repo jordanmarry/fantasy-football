@@ -1,8 +1,10 @@
 package com.example.fantasyfootball
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,11 +33,38 @@ class LeagueActivity : AppCompatActivity(), PlayerClickListener {
             startActivity(intent)
         }
 
+        binding.deleteLeague.setOnClickListener {
+            submitAlert()
+        }
+
         playerRecyclerView = binding.recyclerView
 
         playerRecyclerView.layoutManager = GridLayoutManager(this,1)
 
         getLeagueData()
+    }
+
+    private fun submitAlert() {
+        val builder = AlertDialog.Builder(this)
+
+        with(builder)
+        {
+            setTitle("Confirmation")
+            setMessage("Are you sure you want to delete this league?")
+            setPositiveButton("Yes") { dialog, id ->
+                auth = requireNotNull(FirebaseAuth.getInstance())
+                val email = auth.currentUser?.email
+                val key = email?.substring(0, email.indexOf('@'))
+                dbref = FirebaseDatabase.getInstance().getReference("users/$key/leagues/$leagueName")
+                dbref.removeValue()
+                finish()
+            }
+            setNegativeButton("No") { dialog, id ->
+                // Dismiss the dialog
+                dialog.dismiss()
+            }
+            show()
+        }
     }
 
     override fun onClick(player: Player) {
