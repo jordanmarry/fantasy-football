@@ -1,14 +1,16 @@
 package com.example.fantasyfootball
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.fantasyfootball.databinding.ActivityAdviceBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 
-class AdviceActivity : AppCompatActivity() {
+class AdviceActivity : AppCompatActivity(), PlayerClickListener{
 
     private lateinit var binding : ActivityAdviceBinding
     private  lateinit var league: League
@@ -22,8 +24,8 @@ class AdviceActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         leagueName = intent.getStringExtra("LEAGUE_NAME")!!
-        Log.d("HERE", leagueName)
 
+        getLeagueData()
     }
 
     private fun getLeagueData(){
@@ -35,10 +37,12 @@ class AdviceActivity : AppCompatActivity() {
         dbref.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
-                    val league = snapshot.child("leagueName").value
-                    val team = snapshot.child("teamName").value
-                    // when the JSON IS READY. THIS CAN CHANGE TO val league = snapshot.getValue(League::class.java)
-                    this@AdviceActivity.league = (League(league.toString(),team.toString(), arrayListOf<Player>()))
+                    val arr = arrayListOf<Player>()
+                    for (i in snapshot.child("playerList").children){
+                        val p = i.getValue(Player::class.java)!!
+                        arr.add(p)
+                    }
+                    sellStrongWeak(arr)
                 }
             }
 
@@ -59,8 +63,8 @@ class AdviceActivity : AppCompatActivity() {
 
 
         var sellPlayerList = ArrayList<Player>()
-        var strongPlayerList = ArrayList<ArrayList<Player>>()
-        var weakPlayerList = ArrayList<ArrayList<Player>>()
+        var strongPlayerList = ArrayList<Player>()
+        var weakPlayerList = ArrayList<Player>()
         var qbPlayerList = ArrayList<Player>()
         var rbPlayerList = ArrayList<Player>()
         var wrPlayerList = ArrayList<Player>()
@@ -139,9 +143,13 @@ class AdviceActivity : AppCompatActivity() {
 
 
         if(qbPlayerList.isNotEmpty() && qbPlayerList[0].ppg!! >= 18) {
-            strongPlayerList.add(qbPlayerList)
+            for (i in qbPlayerList){
+                strongPlayerList.add(i)
+            }
         } else {
-            weakPlayerList.add(qbPlayerList)
+            for (i in qbPlayerList){
+                weakPlayerList.add(i)
+            }
         }
         if(rbPlayerList.isNotEmpty()){
             var totalPPG = 0.0
@@ -150,12 +158,18 @@ class AdviceActivity : AppCompatActivity() {
             }
             totalPPG /= rbPlayerList.size
             if(totalPPG >= 12){
-                strongPlayerList.add(rbPlayerList)
+                for (i in rbPlayerList){
+                    strongPlayerList.add(i)
+                }
             } else {
-                weakPlayerList.add(rbPlayerList)
+                for (i in rbPlayerList){
+                    weakPlayerList.add(i)
+                }
             }
         } else {
-            weakPlayerList.add(rbPlayerList)
+            for (i in rbPlayerList){
+                weakPlayerList.add(i)
+            }
         }
         if(wrPlayerList.isNotEmpty()){
             var totalPPG = 0.0
@@ -164,18 +178,46 @@ class AdviceActivity : AppCompatActivity() {
             }
             totalPPG /= wrPlayerList.size
             if(totalPPG >= 12){
-                strongPlayerList.add(wrPlayerList)
+                for (i in wrPlayerList){
+                    strongPlayerList.add(i)
+                }
             } else {
-                weakPlayerList.add(wrPlayerList)
+                for (i in wrPlayerList){
+                    weakPlayerList.add(i)
+                }
             }
         } else {
-            weakPlayerList.add(wrPlayerList)
+            for (i in wrPlayerList){
+                weakPlayerList.add(i)
+            }
         }
         if(tePlayerList.isNotEmpty() && tePlayerList[0].ppg!! >= 18) {
-            strongPlayerList.add(tePlayerList)
+            for (i in tePlayerList){
+                strongPlayerList.add(i)
+            }
         } else {
-            weakPlayerList.add(tePlayerList)
+            for (i in tePlayerList){
+                weakPlayerList.add(i)
+            }
         }
+
+        Log.d("HERE", "SELL: $sellPlayerList")
+        Log.d("HERE", "STRONG: $strongPlayerList")
+        Log.d("HERE", "WEAK: $weakPlayerList")
+
+
+        val sellRecyclerView = binding.sellRecyclerView
+        sellRecyclerView.layoutManager = GridLayoutManager(this,1)
+        sellRecyclerView.adapter = PlayerAdapter(sellPlayerList, this@AdviceActivity, this@AdviceActivity)
+
+
+        val weakRecyclerView = binding.weakRecyclerView
+        weakRecyclerView.layoutManager = GridLayoutManager(this,1)
+        weakRecyclerView.adapter = PlayerAdapter(weakPlayerList, this@AdviceActivity, this@AdviceActivity)
+
+        val strongRecyclerView = binding.strongRecyclerView
+        strongRecyclerView.layoutManager = GridLayoutManager(this,1)
+        strongRecyclerView.adapter = PlayerAdapter(strongPlayerList, this@AdviceActivity, this@AdviceActivity)
 
         // sellPlayerList will contain anywhere between 0 - 3 players that will need to be displayed
         // strongPlayerList contains array lists of each positions players that has been determined strong
@@ -184,6 +226,14 @@ class AdviceActivity : AppCompatActivity() {
 
 
 
+    }
+
+    override fun onClick(player: Player) {
+        val intent = Intent(this, PlayerActivity::class.java)
+        val name = player.name!!.replace(".","")
+        val str = player.pos + "-" + name + "-" + player.team
+        intent.putExtra("PLAYER", str)
+        startActivity(intent)
     }
 
 }

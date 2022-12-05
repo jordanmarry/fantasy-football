@@ -6,6 +6,7 @@
         <entry key="app/src/main/res/layout/activity_advice.xml" value="0.25677083333333334" />
         <entry key="app/src/main/res/layout/activity_league.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_player.xml" value="0.19701086956521738" />
         <entry key="app/src/main/res/layout/activity_rosterinput.xml" value="0.20018115942028986" />
         <entry key="app/src/main/res/layout/card_cell.xml" value="0.165" />
         <entry key="app/src/main/res/layout/card_detail.xml" value="0.18478260869565216" />
@@ -15,6 +16,7 @@
         <entry key="app/src/main/res/layout/login_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/main_activity.xml" value="0.11203703703703703" />
         <entry key="app/src/main/res/layout/main_fragment.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/overview_fragment.xml" value="0.12487335359675786" />
         <entry key="app/src/main/res/layout/player_card_cell.xml" value="0.2557291666666667" />
         <entry key="app/src/main/res/layout/registration_fragment.xml" value="0.165" />
         <entry key="app/src/main/res/layout/rosterinput.xml" value="0.25" />

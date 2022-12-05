@@ -1,5 +1,6 @@
 package com.example.fantasyfootball
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +10,7 @@ import com.example.fantasyfootball.databinding.OverviewFragmentBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 
-class OverviewFragment : Fragment() {
+class OverviewFragment : Fragment(), PlayerClickListener {
     private lateinit var database: DatabaseReference
 
     override fun onCreateView(
@@ -22,6 +23,7 @@ class OverviewFragment : Fragment() {
 
         return binding.root
     }
+
 
     fun rosterSharePercentage()  {
         // find first empty team
@@ -121,5 +123,13 @@ class OverviewFragment : Fragment() {
             }
         }
         return best
+    }
+
+    override fun onClick(player: Player) {
+        val intent = Intent(activity, PlayerActivity::class.java)
+        val name = player.name!!.replace(".","")
+        val str = player.pos + "-" + name + "-" + player.team
+        intent.putExtra("PLAYER", str)
+        startActivity(intent)
     }
 }
