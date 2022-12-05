@@ -100,7 +100,6 @@ class RosterInputActivity : Activity() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     for(snapshot in snapshot.children){
                         if (snapshot.key!! == player) {
-                            Log.d("HERE", snapshot.key!!)
                             val p = snapshot.getValue(Player::class.java)!!
                             addPlayer(p)
                         }

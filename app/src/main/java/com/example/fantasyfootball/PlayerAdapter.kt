@@ -47,7 +47,6 @@ class PlayerAdapter (private val players: List<Player>, private val clickListene
             }
 
             val uri = "@drawable/" + player.team!!.lowercase()
-            Log.d("TEAM", uri)
             val v = context.resources.getIdentifier(uri, null, context.packageName)
             val ves = context.resources.getDrawable(v)
             playerCardCellBinding.teamImage.setImageDrawable(ves)

@@ -164,10 +164,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/leagueName"
-            android:onClick="onSubmitTeam"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:text="Submit Roster"
+            android:onClick="onSubmitTeam"
+            android:text="Create League"
 
             />
 
