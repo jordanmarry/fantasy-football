@@ -67,6 +67,7 @@ class DashboardFragment : Fragment(), LeagueClickListener {
 
         dbref.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
+                leagueArrayList.clear()
                 if (snapshot.exists()){
                     for(leagueSnapshot in snapshot.children){
                         val league = leagueSnapshot.getValue(League::class.java)!!
