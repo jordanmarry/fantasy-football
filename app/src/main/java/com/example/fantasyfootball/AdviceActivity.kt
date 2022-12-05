@@ -113,7 +113,7 @@ class AdviceActivity : AppCompatActivity(), PlayerClickListener{
                         wrPlayerList.add(p)
                     }
                 }
-            } else if (p.pos == "QB"){
+            } else if (p.pos == "TE"){
                 if(tePlayerList.isEmpty()){
                     tePlayerList.add(p)
                 } else {
