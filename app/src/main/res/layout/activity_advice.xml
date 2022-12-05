@@ -32,57 +32,16 @@
             android:textColor="@color/black">
         </TextView>
 
-        <TextView
-            android:id="@+id/playerSell1"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/sellRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="10dp"
-            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.25"
-            android:text="@string/player"
-            android:lines="1">
-
-        </TextView>
-        <TextView
-            android:id="@+id/playerSell2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="15dp"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.494"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.35"
-            android:text="@string/player"
-            android:lines="1">
-
-        </TextView>
-        <TextView
-            android:id="@+id/playerSell3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="15dp"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.494"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.45"
-            android:text="@string/player"
-            android:lines="1">
-
-        </TextView>
+            app:layout_constraintVertical_bias="0.55" />
 
         <TextView
             android:id="@+id/weakPositions"
@@ -102,57 +61,18 @@
             android:textColor="@color/black">
         </TextView>
 
-        <TextView
-            android:id="@+id/playerWeak1"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/weakRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="10dp"
-            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.25"
-            android:text="@string/player"
-            android:lines="1">
+            app:layout_constraintVertical_bias="0.55" />
 
-        </TextView>
-        <TextView
-            android:id="@+id/playerWeak2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="15dp"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.494"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.35"
-            android:text="@string/player"
-            android:lines="1">
 
-        </TextView>
-        <TextView
-            android:id="@+id/playerWeak3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="15dp"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.494"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.45"
-            android:text="@string/player"
-            android:lines="1">
-
-        </TextView>
 
         <TextView
             android:id="@+id/strongPositions"
@@ -172,57 +92,17 @@
             android:textColor="@color/black">
         </TextView>
 
-        <TextView
-            android:id="@+id/playerStrong1"
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/strongRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="10dp"
-            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.494"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.25"
-            android:text="@string/player"
-            android:lines="1">
-
-        </TextView>
-        <TextView
-            android:id="@+id/playerStrong2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="15dp"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.494"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.35"
-            android:text="@string/player"
-            android:lines="1">
-
-        </TextView>
-        <TextView
-            android:id="@+id/playerStrong3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="15dp"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.494"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.45"
-            android:text="@string/player"
-            android:lines="1">
-
-        </TextView>
+            app:layout_constraintVertical_bias="0.55" />
 
     </LinearLayout>
 </ScrollView>

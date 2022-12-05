@@ -27,7 +27,7 @@ class LeagueActivity : AppCompatActivity(), PlayerClickListener {
 
         binding.advice.setOnClickListener{
             val intent = Intent(this, AdviceActivity::class.java)
-//            intent.putExtra("LEAGUE_NAME", leagueName)
+            intent.putExtra("LEAGUE_NAME", leagueName)
             startActivity(intent)
         }
 

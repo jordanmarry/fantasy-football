@@ -12,7 +12,6 @@ class AdviceActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityAdviceBinding
     private  lateinit var league: League
-    private lateinit var database: DatabaseReference
     private lateinit var leagueName : String
     private lateinit var dbref: DatabaseReference
     private lateinit var auth: FirebaseAuth
@@ -22,7 +21,8 @@ class AdviceActivity : AppCompatActivity() {
         binding = ActivityAdviceBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        leagueName = intent.getStringExtra("LEAGUE_NAME")!!
+        leagueName = intent.getStringExtra("LEAGUE_NAME")!!
+        Log.d("HERE", leagueName)
 
     }
 
@@ -49,19 +49,15 @@ class AdviceActivity : AppCompatActivity() {
         })
     }
 
-    fun sellStrongWeak()  {
+    fun sellStrongWeak(usersPlayers: ArrayList<Player>)  {
         // find first empty team
         // database = FirebaseDatabase.getInstance().getReference("users")
 
         // get the current user and check to see their first empty team slot
         // once found, go through playersIn and find each player in the players database
         // then add the player obj to playerList, then add playerList to the first empty team
-        val auth = requireNotNull(FirebaseAuth.getInstance())
-        val email = auth.currentUser?.email
 
-        val key = email?.substring(0, email.indexOf('@'))
 
-        val usersPlayers = database.child("users").child(key!!).child("leagues").child(league.leagueName!!).child("players") as ArrayList<Player>
         var sellPlayerList = ArrayList<Player>()
         var strongPlayerList = ArrayList<ArrayList<Player>>()
         var weakPlayerList = ArrayList<ArrayList<Player>>()
