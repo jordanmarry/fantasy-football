@@ -2,7 +2,6 @@ package com.example.fantasyfootball
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,8 +35,6 @@ class DashboardFragment : Fragment(), LeagueClickListener {
 
         leagueArrayList = arrayListOf<League>()
 
-        getLeagueData( )
-
         binding.overview.setOnClickListener{
             findNavController().navigate(
                 R.id.action_dashboardFragment_to_overviewFragment
@@ -59,11 +56,18 @@ class DashboardFragment : Fragment(), LeagueClickListener {
         startActivity(intent)
     }
 
+    override fun onResume() {
+        super.onResume()
+        getLeagueData()
+    }
+
+
     private fun getLeagueData() {
         auth = requireNotNull(FirebaseAuth.getInstance())
         val email = auth.currentUser?.email
         val key = email?.substring(0, email.indexOf('@'))
         dbref = FirebaseDatabase.getInstance().getReference("users/$key/leagues")
+        leagueArrayList.clear()
 
         dbref.addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {

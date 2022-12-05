@@ -131,14 +131,14 @@ class OverviewFragment : Fragment(), PlayerClickListener {
             threeMostTeamsArr.add(hi)
         }
 
-        Log.d("HERE", threeMostTeamsArr.toString())
-
         // Potentially Make a Team Card. Team Adapter Class.
 
         val teamRecyclerView = binding.teamRecyclerView
-        val size = if (threeMostTeamsArr.size >= 3) 3 else threeMostTeamsArr.size
-        teamRecyclerView.layoutManager = GridLayoutManager(activity, size)
-        teamRecyclerView.adapter = TeamAdapter(threeMostTeamsArr, this@OverviewFragment.activity!!.applicationContext)
+        if (threeMostTeamsArr.size > 0){
+            val size = if (threeMostTeamsArr.size >= 3) 3 else threeMostTeamsArr.size
+            teamRecyclerView.layoutManager = GridLayoutManager(activity, size)
+            teamRecyclerView.adapter = TeamAdapter(threeMostTeamsArr, this@OverviewFragment.activity!!.applicationContext)
+        }
 
 
         // fiveMostOwned contains five most owned player objects across leagues

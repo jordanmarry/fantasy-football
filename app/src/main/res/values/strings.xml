@@ -50,6 +50,7 @@
     <string name="ffpoints">FFPoints</string>
     <string name="ffpoints_string">FFPoints: %d</string>
     <string name="player_name">Player Name</string>
+    <string name="delete_league">Delete League</string>
     <string-array name="teams">
         <item>ARI</item>
         <item>ATL</item>
