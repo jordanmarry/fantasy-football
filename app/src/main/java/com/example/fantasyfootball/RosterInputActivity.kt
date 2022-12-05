@@ -1,17 +1,14 @@
 package com.example.fantasyfootball
 
 import android.app.Activity
-import android.app.AlertDialog
-import android.content.DialogInterface
 import android.os.Bundle
-import android.renderscript.Sampler
 import android.util.Log
 import android.view.View
 import android.widget.*
 import android.widget.AdapterView.OnItemLongClickListener
-import androidx.core.view.isVisible
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+
 
 class RosterInputActivity : Activity() {
     // variable declarations
@@ -62,7 +59,37 @@ class RosterInputActivity : Activity() {
         lvItems!!.onItemLongClickListener =
                 // remove the player at pos
             OnItemLongClickListener { adapter, item, pos, id ->
+
+
+                val auth = requireNotNull(FirebaseAuth.getInstance())
+                val email = auth.currentUser?.email
+                val key = email?.substring(0, email.indexOf('@'))
+
+                database = FirebaseDatabase.getInstance()
+                    .getReference("users/$key/leagues/$leagueName/playerList")
+
+                val first = items!![pos].split("\\s".toRegex())[0][0]
+                val last = items!![pos].split("\\s".toRegex())[1]
+                val playerName = "$first.$last"
+
+                database.addListenerForSingleValueEvent(object: ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        for (playerSnapshot in snapshot.getChildren()) {
+                            val player = playerSnapshot.getValue(Player::class.java)!!
+                            if (player.name == playerName){
+                                playerSnapshot.getRef().removeValue();
+                            }
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+                })
+
+
                 items!!.removeAt(pos)
+
 
                 //
                 // could implement delete from DB but if too much work delete
@@ -86,24 +113,25 @@ class RosterInputActivity : Activity() {
             // format for API
             val fC = fName[0]
             val player = "${getPos()}-$fC$lName-${getTeam()}"
-            // display player
-            itemsAdapter!!.add("$fName $lName")
-            // reset view
-            etNewItem.setText("")
-            etNewItem2.setText("")
-            // add formatted name
 
             database = FirebaseDatabase.getInstance()
-                .getReference("players")
+                .getReference("players/$player")
 
             database.addListenerForSingleValueEvent(object: ValueEventListener{
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    for(snapshot in snapshot.children){
-                        if (snapshot.key!! == player) {
-                            val p = snapshot.getValue(Player::class.java)!!
-                            addPlayer(p)
-                        }
+                    if (snapshot.exists()) {
+                        val p = snapshot.getValue(Player::class.java)!!
+                        // display player
+                        itemsAdapter!!.add("$fName $lName")
+                        // reset view
+                        etNewItem.setText("")
+                        etNewItem2.setText("")
+                        // add formatted name
+                        addPlayer(p)
+                    } else {
+                        Toast.makeText(applicationContext, "Invalid Player. Try Again", Toast.LENGTH_LONG).show()
                     }
+
                 }
 
                 override fun onCancelled(error: DatabaseError) {
