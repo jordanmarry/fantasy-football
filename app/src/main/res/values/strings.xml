@@ -32,13 +32,12 @@
     <string name="overview">Overview</string>
     <string name="advice">advice</string>
     <string name="players_to_sell"><u><b>Players to Sell</b></u></string>
-    <string name="weak_positions"><u><b>Weak Positions</b></u></string>
-    <string name="strong_positions"><u><b>Strong Positions</b></u></string>
+    <string name="weak_positions"><u><b>Weak Starters</b></u></string>
+    <string name="strong_positions"><u><b>Strong Starters</b></u></string>
     <string name="nfl_team_stake"><u><b>Top 3 NFL Team Stake</b></u></string>
     <string name="nfl_team_and_percentage">NFL Team and Percentage</string>
     <string name="top_5_most_rostered_players"><u><b>Top 5 Most Rostered Players</b></u></string>
     <string name="top_position_players"><u><b>Top Position Players</b></u></string>
-
     <string name="playernameplaceholder">PlayerNamePlaceHolder</string>
     <string name="playerNamePlaceHolderString">Player Name: %s</string>
     <string name="positionplaceholder">PositionPlaceHolder</string>
@@ -77,9 +76,9 @@
         <item>PHI</item>
         <item>PIT</item>
         <item>LAC</item>
-        <item>SF</item>
-        <item>SEA</item>
         <item>LAR</item>
+        <item>SEA</item>
+        <item>SF</item>
         <item>TB</item>
         <item>TEN</item>
         <item>WAS</item>

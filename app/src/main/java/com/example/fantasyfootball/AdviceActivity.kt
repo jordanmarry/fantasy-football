@@ -142,62 +142,41 @@ class AdviceActivity : AppCompatActivity(), PlayerClickListener{
 
 
 
-        if(qbPlayerList.isNotEmpty() && qbPlayerList[0].ppg!! >= 18) {
-            for (i in qbPlayerList){
-                strongPlayerList.add(i)
-            }
-        } else {
-            for (i in qbPlayerList){
-                weakPlayerList.add(i)
+        if(qbPlayerList.isNotEmpty()) {
+            if (qbPlayerList[0].ppg!! >= 17) {
+                strongPlayerList.add(qbPlayerList[0])
+
+            } else {
+                weakPlayerList.add(qbPlayerList[0])
+
             }
         }
+
         if(rbPlayerList.isNotEmpty()){
-            var totalPPG = 0.0
-            for(i in rbPlayerList){
-                totalPPG += i.ppg!!
-            }
-            totalPPG /= rbPlayerList.size
-            if(totalPPG >= 12){
-                for (i in rbPlayerList){
+            for(i in rbPlayerList) {
+                if (i.ppg!! >= 8.6) {
                     strongPlayerList.add(i)
-                }
-            } else {
-                for (i in rbPlayerList){
+                } else {
                     weakPlayerList.add(i)
                 }
             }
-        } else {
-            for (i in rbPlayerList){
-                weakPlayerList.add(i)
-            }
         }
+
         if(wrPlayerList.isNotEmpty()){
-            var totalPPG = 0.0
-            for(i in wrPlayerList){
-                totalPPG += i.ppg!!
-            }
-            totalPPG /= wrPlayerList.size
-            if(totalPPG >= 12){
-                for (i in wrPlayerList){
+            for(i in wrPlayerList) {
+                if (i.ppg!! >= 7.1) {
                     strongPlayerList.add(i)
-                }
-            } else {
-                for (i in wrPlayerList){
+                } else {
                     weakPlayerList.add(i)
                 }
             }
-        } else {
-            for (i in wrPlayerList){
-                weakPlayerList.add(i)
-            }
         }
-        if(tePlayerList.isNotEmpty() && tePlayerList[0].ppg!! >= 18) {
-            for (i in tePlayerList){
-                strongPlayerList.add(i)
-            }
-        } else {
-            for (i in tePlayerList){
-                weakPlayerList.add(i)
+
+        if(tePlayerList.isNotEmpty()){
+            if (tePlayerList[0].ppg!! >= 5) {
+                strongPlayerList.add(tePlayerList[0])
+            } else {
+                weakPlayerList.add(tePlayerList[0])
             }
         }
 
