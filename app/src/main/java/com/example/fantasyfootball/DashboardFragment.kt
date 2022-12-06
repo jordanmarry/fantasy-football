@@ -1,5 +1,6 @@
 package com.example.fantasyfootball
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -70,6 +71,7 @@ class DashboardFragment : Fragment(), LeagueClickListener {
         leagueArrayList.clear()
 
         dbref.addValueEventListener(object: ValueEventListener{
+            @SuppressLint("UseRequireInsteadOfGet")
             override fun onDataChange(snapshot: DataSnapshot) {
                 leagueArrayList.clear()
                 if (snapshot.exists()){
@@ -79,7 +81,7 @@ class DashboardFragment : Fragment(), LeagueClickListener {
                         leagueArrayList.add(league)
 
                     }
-                    leagueRecyclerView.adapter = LeagueAdapter(leagueArrayList, this@DashboardFragment)
+                    leagueRecyclerView.adapter = this@DashboardFragment.context?.let { LeagueAdapter(leagueArrayList, this@DashboardFragment, it.applicationContext) }
                 }
             }
 

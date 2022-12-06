@@ -137,7 +137,8 @@ class OverviewFragment : Fragment(), PlayerClickListener {
         if (threeMostTeamsArr.size > 0){
             val size = if (threeMostTeamsArr.size >= 3) 3 else threeMostTeamsArr.size
             teamRecyclerView.layoutManager = GridLayoutManager(activity, size)
-            teamRecyclerView.adapter = TeamAdapter(threeMostTeamsArr, this@OverviewFragment.activity!!.applicationContext)
+            teamRecyclerView.adapter =
+                this@OverviewFragment.activity?.let { TeamAdapter(threeMostTeamsArr, it.applicationContext) }
         }
 
 
@@ -146,7 +147,7 @@ class OverviewFragment : Fragment(), PlayerClickListener {
         // bestPlayers map that contains best player at each position
         val mostRecyclerView = binding.mostRecyclerView
         mostRecyclerView.layoutManager = GridLayoutManager(activity,1)
-        mostRecyclerView.adapter = PlayerAdapter(fiveMostOwned, this@OverviewFragment, this@OverviewFragment.activity!!.applicationContext)
+        mostRecyclerView.adapter = this@OverviewFragment.activity?.let { PlayerAdapter(fiveMostOwned, this@OverviewFragment, it.applicationContext) }
 
         val bestPlayersArr = arrayListOf<Player>()
         for (i in bestPlayers.keys) {
@@ -155,7 +156,7 @@ class OverviewFragment : Fragment(), PlayerClickListener {
 
         val topPosRecyclerView = binding.topPosRecyclerView
         topPosRecyclerView.layoutManager = GridLayoutManager(activity,1)
-        topPosRecyclerView.adapter = PlayerAdapter(bestPlayersArr, this@OverviewFragment, this@OverviewFragment.activity!!.applicationContext)
+        topPosRecyclerView.adapter = this@OverviewFragment.activity?.let { PlayerAdapter(bestPlayersArr, this@OverviewFragment, it.applicationContext) }
 
 
     }

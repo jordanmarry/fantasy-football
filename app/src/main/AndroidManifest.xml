@@ -22,6 +22,8 @@
             android:exported="false" />
         <activity android:name=".RosterInputActivity"
             android:exported="false" />
+        <activity android:name=".EditLeagueActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
