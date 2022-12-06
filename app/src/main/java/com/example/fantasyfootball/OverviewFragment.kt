@@ -75,26 +75,31 @@ class OverviewFragment : Fragment(), PlayerClickListener {
 
         // Getting the Data primed
         for (l in leagueList){
-            for (p in l.playerList!!){
-                mostOwned[p] = 0
-                allTeams[p.team!!] = 0
+            if (l.playerList != null){
+                for (p in l.playerList!!){
+                    mostOwned[p] = 0
+                    allTeams[p.team!!] = 0
 
-                if (!bestPlayers.containsKey(p.pos)){
-                    bestPlayers.put(p.pos!!, p)
-                } else if(bestPlayers.containsKey(p.pos) && bestPlayers.get(p.pos)!!.ffPoints!! < p.ffPoints!!){
-                    bestPlayers.put(p.pos!!, p)
+                    if (!bestPlayers.containsKey(p.pos)){
+                        bestPlayers.put(p.pos!!, p)
+                    } else if(bestPlayers.containsKey(p.pos) && bestPlayers.get(p.pos)!!.ffPoints!! < p.ffPoints!!){
+                        bestPlayers.put(p.pos!!, p)
+                    }
                 }
             }
+
         }
 
         for (l in leagueList) {
-            for (p in l.playerList!!) {
-                var count = mostOwned.get(p) as Int
-                count += 1
-                mostOwned.put(p, count)
-                var teamCount = allTeams.get(p.team) as Int
-                teamCount += 1
-                allTeams.put(p.team!!, teamCount)
+            if (l.playerList != null) {
+                for (p in l.playerList!!) {
+                    var count = mostOwned.get(p) as Int
+                    count += 1
+                    mostOwned.put(p, count)
+                    var teamCount = allTeams.get(p.team) as Int
+                    teamCount += 1
+                    allTeams.put(p.team!!, teamCount)
+                }
             }
         }
 
