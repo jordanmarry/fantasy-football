@@ -32,7 +32,7 @@ class PlayerAdapter (private val players: List<Player>, private val clickListene
             val name = player.name
             val team = player.team
             val ffpoints = player.ffPoints
-            val snapshare = player.snapShare!! * 100
+            val snapshare = player.snapShare?.times(100)
             val ss = String.format("%.2f", snapshare)
             val ppg = player.ppg
             val ppg2 = String.format("%.3f", ppg)
@@ -46,7 +46,7 @@ class PlayerAdapter (private val players: List<Player>, private val clickListene
                 clickListener.onClick(player)
             }
 
-            val uri = "@drawable/" + player.team!!.lowercase()
+            val uri = "@drawable/" + player.team?.lowercase()
             val v = context.resources.getIdentifier(uri, null, context.packageName)
             val ves = context.resources.getDrawable(v)
             playerCardCellBinding.teamImage.setImageDrawable(ves)
