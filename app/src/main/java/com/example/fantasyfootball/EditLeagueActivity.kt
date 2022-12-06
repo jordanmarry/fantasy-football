@@ -156,12 +156,18 @@ class EditLeagueActivity: AppCompatActivity() {
                     if (snapshot.exists()) {
                         val p = snapshot.getValue(Player::class.java)!!
                         // display player
-                        itemsAdapter!!.add("$fC $lName ${getPos()} ${getTeam()}")
-                        // reset view
-                        etNewItem.setText("")
-                        etNewItem2.setText("")
-                        // add formatted name
-                        addPlayer(p)
+                        val strName = "$fC $lName ${getPos()} ${getTeam()}"
+                        if (itemsAdapter.getPosition(strName) == null){
+                            itemsAdapter!!.add(strName)
+                            // reset view
+                            etNewItem.setText("")
+                            etNewItem2.setText("")
+                            // add formatted name
+                            addPlayer(p)
+                        } else {
+                            Toast.makeText(applicationContext, "Duplicate Player. Try Again", Toast.LENGTH_LONG).show()
+                        }
+
                     } else {
                         Toast.makeText(applicationContext, "Invalid Player. Try Again", Toast.LENGTH_LONG).show()
                     }
