@@ -79,12 +79,16 @@ class EditLeagueActivity: AppCompatActivity() {
 
             database.addListenerForSingleValueEvent(object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
+                    val arr = ArrayList<Player>()
                     for (playerSnapshot in snapshot.getChildren()) {
                         val player = playerSnapshot.getValue(Player::class.java)!!
+                        arr.add(player)
                         if (player.name == playerName){
                             playerSnapshot.getRef().removeValue();
+                            arr.remove(player)
                         }
                     }
+                    database.setValue(arr)
                 }
 
                 override fun onCancelled(error: DatabaseError) {
